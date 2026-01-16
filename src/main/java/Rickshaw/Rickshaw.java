@@ -1,4 +1,6 @@
-public class Duke {
+package Rickshaw;
+
+public class Rickshaw {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
