@@ -16,9 +16,16 @@ public class Ui {
         String welcomeMessage;
         System.out.println(HORIZONTAL_LINE);
         welcomeMessage = String.format(
-                "Hello! I'm %s%n What can i do for you?%n",
+                "Hello! I'm %s%n What can i do for you?",
                 chatbotName
         );
         return welcomeMessage;
+    }
+
+    public String showExitMessage() {
+        String exitMessage;
+        System.out.println(HORIZONTAL_LINE);
+        exitMessage = "Bye. Hope to see you again soon!";
+        return exitMessage;
     }
 }
