@@ -2,6 +2,6 @@ package Rickshaw;
 
 public enum CommandType {
     LIST,
-    BLAH,
+    ECHO,
     BYE,
 }
