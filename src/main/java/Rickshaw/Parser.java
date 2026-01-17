@@ -4,13 +4,13 @@ public class Parser {
     public Command parse(String input) throws RickshawException{
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
-        String commandWord = parts[0];
+        String commandWord = parts[0].toUpperCase();
 
         switch (commandWord) {
-            case "bye" -> {
+            case "BYE" -> {
                 return new Command(CommandType.BYE);
             }
-            case "list" -> {
+            case "LIST" -> {
                 return new Command(CommandType.LIST);
             }
             default -> {
