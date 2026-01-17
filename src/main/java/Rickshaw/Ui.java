@@ -12,22 +12,40 @@ public class Ui {
         this.chatbotName = chatbotName;
     }
 
-    public String showWelcomeMessage() {
-        String welcomeMessage;
+    public String readCommand() {
+        return scanner.nextLine();
+    }
+
+    private void format(String message) {
         System.out.println(HORIZONTAL_LINE);
+        System.out.println("     " + message.replace("\n", "\n     "));
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    public void showWelcomeMessage() {
+        String welcomeMessage;
         welcomeMessage = String.format(
                 "Hello! I'm %s%nWhat can i do for you?",
                 chatbotName
         );
-        return welcomeMessage;
+        format(welcomeMessage);
     }
 
-    public String showExitMessage() {
+    public void showExitMessage() {
         String exitMessage;
-        System.out.println(HORIZONTAL_LINE);
-        exitMessage = String.format(
-                "Bye. Hope to see you again soon!\n" + HORIZONTAL_LINE
-        );
-        return exitMessage;
+        exitMessage = "Bye. Hope to see you again soon!";
+        format(exitMessage);
+    }
+
+    public void showErrorMessage(String errorMessage) {
+        format(errorMessage);
+    }
+
+    public void showList() {
+        format("list");
+    }
+
+    public void showEchoMessage(String input) {
+        format(input);
     }
 }

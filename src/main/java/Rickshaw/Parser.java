@@ -1,7 +1,7 @@
 package Rickshaw;
 
 public class Parser {
-    public Command parse(String input) {
+    public Command parse(String input) throws RickshawException{
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
         String commandWord = parts[0];
