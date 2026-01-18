@@ -3,10 +3,12 @@ package Rickshaw;
 public class Rickshaw {
     private final Ui ui;
     private final Parser parser;
+    private TaskList tasks;
 
     public Rickshaw(String name) {
         this.ui = new Ui(name);
         this.parser = new Parser();
+        this.tasks = new TaskList();
     }
 
     public void run() {
@@ -18,7 +20,7 @@ public class Rickshaw {
 
             try {
                 Command parsedCommand = parser.parse(command);
-                parsedCommand.run(ui);
+                parsedCommand.run(tasks, ui);
 
                 if (parsedCommand.getType() == CommandType.BYE) {
                     isExit = true;
