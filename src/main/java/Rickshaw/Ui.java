@@ -1,5 +1,8 @@
 package Rickshaw;
 
+import Rickshaw.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -41,11 +44,28 @@ public class Ui {
         format(errorMessage);
     }
 
-    public void showList() {
-        format("list");
+    public void showTaskAdded(String task) {
+        format("added: " + task);
+    }
+
+    public void showList(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            format("Your list is currently empty.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1).append(".").append(tasks.get(i));
+            if (i < tasks.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        format(sb.toString());
     }
 
     public void showEchoMessage(String input) {
         format(input);
     }
+
 }
