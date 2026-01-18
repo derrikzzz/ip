@@ -25,10 +25,10 @@ public class Command {
                 ui.showList(tasks.getTasks());
                 break;
             case MARK:
-                tasks.getTask(Integer.parseInt(args[0])).markDone();
+                markTask(tasks, ui);
                 break;
             case UNMARK:
-                tasks.getTask(Integer.parseInt(args[0])).markUndone();
+                unmarkTask(tasks, ui);
                 break;
             case ECHO:
                 String desc = args[0];
@@ -38,6 +38,20 @@ public class Command {
                 ui.showTaskAdded(desc);
                 break;
         }
+    }
+
+    private void markTask(TaskList tasks, Ui ui) {
+        int index = Integer.parseInt(args[0]);
+        Task task = tasks.getTask(index - 1);
+        task.markDone();
+        ui.showMarkedTask(task);
+    }
+
+    private void unmarkTask(TaskList tasks, Ui ui) {
+        int index = Integer.parseInt(args[0]);
+        Task task = tasks.getTask(index - 1);
+        task.markUndone();
+        ui.showUnmarkedTask(task);
     }
 
     public CommandType getType() {

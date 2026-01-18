@@ -68,4 +68,12 @@ public class Ui {
         format(input);
     }
 
+    public void showMarkedTask(Task task) {
+        format("Nice! I've marked this task as done:\n       " + task);
+    }
+
+    public void showUnmarkedTask(Task task) {
+        format("OK, I've marked this task as not done yet:\n       " + task);
+    }
+
 }
