@@ -7,6 +7,12 @@ public class Parser {
         String commandWord = parts[0].toUpperCase();
 
         switch (commandWord) {
+            case "MARK" -> {
+                return new Command(CommandType.MARK, new String[]{parts[1]});
+            }
+            case "UNMARK" -> {
+                return new Command(CommandType.UNMARK, new String[]{parts[1]});
+            }
             case "BYE" -> {
                 return new Command(CommandType.BYE);
             }
