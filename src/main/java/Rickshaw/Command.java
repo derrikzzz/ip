@@ -1,5 +1,7 @@
 package Rickshaw;
 
+import Rickshaw.task.Task;
+
 public class Command {
     private final CommandType type;
     private final String[] args;
@@ -14,16 +16,20 @@ public class Command {
         this.args = new String[0];
     }
 
-    public void run(Ui ui) {
+    public void run(TaskList tasks, Ui ui) {
         switch (type) {
             case BYE:
                 ui.showExitMessage();
                 break;
             case LIST:
-                ui.showList();
+                ui.showList(tasks.getTasks());
                 break;
             case ECHO:
-                ui.showEchoMessage(args[0]);
+                String desc = args[0];
+                Task newTask = new Task(desc);
+                tasks.addTask(newTask);
+
+                ui.showTaskAdded(desc);
                 break;
         }
     }
