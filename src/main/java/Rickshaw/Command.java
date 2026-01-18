@@ -24,6 +24,12 @@ public class Command {
             case LIST:
                 ui.showList(tasks.getTasks());
                 break;
+            case MARK:
+                tasks.getTask(Integer.parseInt(args[0])).markDone();
+                break;
+            case UNMARK:
+                tasks.getTask(Integer.parseInt(args[0])).markUndone();
+                break;
             case ECHO:
                 String desc = args[0];
                 Task newTask = new Task(desc);
