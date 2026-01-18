@@ -1,6 +1,6 @@
 package Rickshaw.task;
 
-public class Task {
+abstract public class Task {
     protected String description;
     protected boolean isDone;
 
