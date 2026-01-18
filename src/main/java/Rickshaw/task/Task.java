@@ -17,9 +17,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getIcon() {
+        return this.isDone ? "X" : "";
+    }
+
     @Override
     public String toString() {
-        return "[" + "] " + description;
+        return String.format("[%s] %s", this.getIcon(), this.description);
     }
 
 
