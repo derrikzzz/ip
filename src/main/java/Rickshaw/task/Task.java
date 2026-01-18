@@ -9,6 +9,14 @@ public class Task {
         this.isDone = false; 
     }
 
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    public void markUndone() {
+        this.isDone = false;
+    }
+
     @Override
     public String toString() {
         return "[" + "] " + description;
