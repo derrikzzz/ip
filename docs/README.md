@@ -28,3 +28,10 @@ expected output
 ## Feature XYZ
 
 // Feature details
+
+## Troubleshooting
+For Mac/Linux users: 
+- If you encounter Permission denied error, try running:
+  ```aiignore
+    chmod +x text-ui-test/runtest.sh
+  ```
