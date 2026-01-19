@@ -13,6 +13,9 @@ public class Parser {
             case "UNMARK" -> {
                 return new Command(CommandType.UNMARK, new String[]{parts[1]});
             }
+            case "DELETE" -> {
+                return new Command(CommandType.DELETE, new String[]{parts[1]});
+            }
             case "TODO" -> {
                 return parseTodo(trimmedCommand);
             }
