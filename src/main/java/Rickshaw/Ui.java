@@ -44,8 +44,10 @@ public class Ui {
         format(errorMessage);
     }
 
-    public void showTaskAdded(String task) {
-        format("added: " + task);
+    public void showTaskAdded(Task task, int totalTasks) {
+        format("Got it. I've added this task:\n" +
+                "       " + task + "\n" +
+                "     Now you have " + totalTasks + " tasks in the list.");
     }
 
     public void showList(ArrayList<Task> tasks) {
@@ -54,14 +56,12 @@ public class Ui {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
+        System.out.println("Here are the tasks in your list:");
+        System.out.println(HORIZONTAL_LINE);
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(".").append(tasks.get(i));
-            if (i < tasks.size() - 1) {
-                sb.append("\n");
-            }
+            System.out.println("     " + (i + 1) + "." + tasks.get(i));
         }
-        format(sb.toString());
+        System.out.println(HORIZONTAL_LINE);
     }
 
     public void showEchoMessage(String input) {
