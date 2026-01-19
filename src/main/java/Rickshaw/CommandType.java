@@ -5,5 +5,8 @@ public enum CommandType {
     ECHO,
     MARK,
     UNMARK,
+    TODO,
+    DEADLINE,
+    EVENT,
     BYE,
 }
