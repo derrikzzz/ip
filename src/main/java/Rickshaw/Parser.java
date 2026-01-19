@@ -37,7 +37,7 @@ public class Parser {
     private Command parseTodo(String trimmedCommand) throws RickshawException {
         String description = trimmedCommand.substring(4).trim();
         if (description.isEmpty()) {
-            throw new RickshawException("Description of todo cannot be empty! ");
+            throw new RickshawException("Are you sure you want to add a todo task, the description of a todo task cannot be empty");
         }
         return new Command(CommandType.TODO, new String[]{description});
     }
@@ -47,7 +47,7 @@ public class Parser {
         String payload = trimmedCommand.substring(8).trim();
         String[] segments = payload.split(" /by ");
         if (segments.length < 2) {
-            throw new RickshawException("Invalid deadline format. Usage: deadline <description> /by <time>");
+            throw new RickshawException("I recognise that you want to add a deadline task, but the format is incorrect. Usage: deadline <description> /by <time>");
         }
         String description = segments[0];
         String doneBy = segments[1];
@@ -58,7 +58,7 @@ public class Parser {
         String payload = trimmedCommand.substring(5).trim();
         String[] fromSplit = payload.split(" /from ");
         if (fromSplit.length < 2) {
-            throw new RickshawException("Invalid event format. Missing '/from'. Usage: event <description> /from <start]> /to <end>");
+            throw new RickshawException("I recognise that you want to add an event task, but the format is incorrect. Usage: event <description> /from <start]> /to <end>");
         }
 
         String description = fromSplit[0];
@@ -66,7 +66,7 @@ public class Parser {
 
         String[] timeSplit = timeInfo.split(" /to ");
         if (timeSplit.length < 2) {
-            throw new RickshawException("Invalid event format. Missing '/to'. Usage: event <description> /from <start> /to <end>");
+            throw new RickshawException("I recognise that you want to add an event task, but the format is incorrect. Usage: event <description> /from <start> /to <end>");
         }
         String from = timeSplit[0];
         String to = timeSplit[1];
