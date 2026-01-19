@@ -29,4 +29,8 @@ public class TaskList {
         }
         return null;
     }
+
+    public int size() {
+        return tasks.size();
+    }
 }
