@@ -27,13 +27,17 @@ public class Command {
                 ui.showList(tasks.getTasks());
                 break;
             case MARK:
-                tasks.markTask(Integer.parseInt(args[0]));
+                Task markedTask = tasks.markTask(Integer.parseInt(args[0]));
+                ui.showMarkedTask(markedTask);
                 break;
             case UNMARK:
-                tasks.unmarkTask(Integer.parseInt(args[0]));
+                Task unmarkedTask = tasks.unmarkTask(Integer.parseInt(args[0]));
+                ui.showUnmarkedTask(unmarkedTask);
                 break;
             case DELETE:
-                
+                Task deletedTask = tasks.deleteTask(Integer.parseInt(args[0]));
+                ui.showTaskDeleted(deletedTask, tasks.size());
+                break;
             case TODO:
                 Todo newTodo = new Todo(args[0]);
                 tasks.addTask(newTodo);
