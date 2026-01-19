@@ -1,6 +1,9 @@
 package Rickshaw;
 
+import Rickshaw.task.Deadline;
 import Rickshaw.task.Task;
+import Rickshaw.task.Todo;
+import Rickshaw.task.Event;
 
 public class Command {
     private final CommandType type;
@@ -19,7 +22,6 @@ public class Command {
     public void run(TaskList tasks, Ui ui) {
         switch (type) {
             case BYE:
-                ui.showExitMessage();
                 break;
             case LIST:
                 ui.showList(tasks.getTasks());
@@ -30,13 +32,20 @@ public class Command {
             case UNMARK:
                 unmarkTask(tasks, ui);
                 break;
-            case ECHO:
-                String desc = args[0];
-                Task newTask = new Task(desc);
-                tasks.addTask(newTask);
-
-                ui.showTaskAdded(desc);
+            case TODO:
+                Todo newTodo = new Todo(args[0]);
+                tasks.addTask(newTodo);
+                ui.showTaskAdded(newTodo, tasks.size());
                 break;
+            case DEADLINE:
+                Deadline newDeadline = new Deadline(args[0], args[1]);
+                tasks.addTask(newDeadline);
+                ui.showTaskAdded(newDeadline, tasks.size());
+                break;
+            case EVENT:
+                Event newEvent = new Event(args[0], args[1], args[2]);
+                tasks.addTask(newEvent);
+                ui.showTaskAdded(newEvent, tasks.size());
         }
     }
 
