@@ -53,6 +53,12 @@ public class Ui {
                 "     Now you have " + totalTasks + " tasks in the list.");
     }
 
+    public void showTaskDeleted(Task task, int totalTasks) {
+        format("Noted. I've removed this task:\n" +
+                "       " + task + "\n" +
+                "     Now you have " + totalTasks + " tasks in the list.");
+    }
+
     public void showList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             format("Your list is currently empty.");
