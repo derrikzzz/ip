@@ -16,7 +16,10 @@ public class Ui {
     }
 
     public String readCommand() {
-        return scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        }
+        return "bye";
     }
 
     private void format(String message) {
