@@ -30,7 +30,29 @@ public class TaskList {
         return null;
     }
 
+    public Task markTask(int index) {
+        Task task = this.getTask(index - 1);
+        task.markDone();
+        return task;
+    }
+
+    public Task unmarkTask(int index) {
+        Task task = this.getTask(index - 1);
+        task.markUndone();
+        return task;
+    }
+
+    public Task deleteTask(int index) {
+        return this.tasks.remove(index - 1);
+    }
+
     public int size() {
         return tasks.size();
     }
+
+    public ArrayList<Task> getAllTasks() {
+        return this.tasks;
+    }
+
+
 }
