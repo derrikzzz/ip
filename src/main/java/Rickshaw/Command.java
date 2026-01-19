@@ -27,11 +27,13 @@ public class Command {
                 ui.showList(tasks.getTasks());
                 break;
             case MARK:
-                markTask(tasks, ui);
+                tasks.markTask(Integer.parseInt(args[0]));
                 break;
             case UNMARK:
-                unmarkTask(tasks, ui);
+                tasks.unmarkTask(Integer.parseInt(args[0]));
                 break;
+            case DELETE:
+                
             case TODO:
                 Todo newTodo = new Todo(args[0]);
                 tasks.addTask(newTodo);
@@ -47,20 +49,6 @@ public class Command {
                 tasks.addTask(newEvent);
                 ui.showTaskAdded(newEvent, tasks.size());
         }
-    }
-
-    private void markTask(TaskList tasks, Ui ui) {
-        int index = Integer.parseInt(args[0]);
-        Task task = tasks.getTask(index - 1);
-        task.markDone();
-        ui.showMarkedTask(task);
-    }
-
-    private void unmarkTask(TaskList tasks, Ui ui) {
-        int index = Integer.parseInt(args[0]);
-        Task task = tasks.getTask(index - 1);
-        task.markUndone();
-        ui.showUnmarkedTask(task);
     }
 
     public CommandType getType() {
