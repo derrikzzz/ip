@@ -1,4 +1,4 @@
-package Rickshaw.task;
+package rickshaw.task;
 
 abstract public class Task {
     protected String description;

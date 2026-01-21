@@ -1,4 +1,4 @@
-package Rickshaw;
+package rickshaw;
 
 public class Parser {
     public Command parse(String input) throws RickshawException{

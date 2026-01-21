@@ -1,4 +1,4 @@
-package Rickshaw.task;
+package rickshaw.task;
 
 public class Event extends Task{
     protected String from;

@@ -1,4 +1,4 @@
-package Rickshaw;
+package rickshaw;
 
 public enum CommandType {
     LIST,

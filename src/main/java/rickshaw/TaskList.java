@@ -1,6 +1,6 @@
-package Rickshaw;
+package rickshaw;
 
-import Rickshaw.task.Task;
+import rickshaw.task.Task;
 
 import java.util.ArrayList;
 

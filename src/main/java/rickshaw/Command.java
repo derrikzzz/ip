@@ -1,9 +1,9 @@
-package Rickshaw;
+package rickshaw;
 
-import Rickshaw.task.Deadline;
-import Rickshaw.task.Task;
-import Rickshaw.task.Todo;
-import Rickshaw.task.Event;
+import rickshaw.task.Deadline;
+import rickshaw.task.Task;
+import rickshaw.task.Todo;
+import rickshaw.task.Event;
 
 public class Command {
     private final CommandType type;

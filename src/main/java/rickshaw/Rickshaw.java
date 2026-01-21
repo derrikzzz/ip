@@ -1,4 +1,4 @@
-package Rickshaw;
+package rickshaw;
 
 public class Rickshaw {
     private final Ui ui;

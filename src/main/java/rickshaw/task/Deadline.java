@@ -1,4 +1,4 @@
-package Rickshaw.task;
+package rickshaw.task;
 
 public class Deadline extends Task {
     protected String by;
