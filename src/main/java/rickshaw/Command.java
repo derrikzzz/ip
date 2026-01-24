@@ -4,6 +4,7 @@ import rickshaw.task.Deadline;
 import rickshaw.task.Task;
 import rickshaw.task.Todo;
 import rickshaw.task.Event;
+import java.io.IOException;
 
 public class Command {
     private final CommandType type;
@@ -19,9 +20,10 @@ public class Command {
         this.args = new String[0];
     }
 
-    public void run(TaskList tasks, Ui ui) {
+    public void run(TaskList tasks, Ui ui, Storage storage) {
         switch (type) {
             case BYE:
+                ui.showExitMessage();
                 break;
             case LIST:
                 ui.showList(tasks.getTasks());
