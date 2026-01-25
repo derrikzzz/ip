@@ -26,9 +26,6 @@ abstract public class Task {
         return String.format("[%s] %s", this.getIcon(), this.description);
     }
 
-
-
-
-
+    public abstract String toFileFormat();
 
 }

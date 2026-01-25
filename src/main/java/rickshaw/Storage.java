@@ -1,0 +1,107 @@
+package rickshaw;
+
+import java.util.ArrayList;
+import rickshaw.task.Task;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.io.File;
+import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import rickshaw.task.Todo;
+import rickshaw.task.Deadline;
+import rickshaw.task.Event;
+
+public class Storage {
+    private static final String DELIMITER = " \\| ";
+    protected String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> load() throws IOException, RickshawException {
+        File f = new File(filePath);
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (!f.exists()) {
+            return tasks;
+        }
+        
+        try (Scanner s = new Scanner(f)) {
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                process(line, tasks);
+            }
+        } catch (IOException e) {
+            throw new RickshawException("Error loading file.");
+        }
+        return tasks;
+    }
+
+    private void process(String line, ArrayList<Task> tasks) throws RickshawException {
+        if (line.trim().isEmpty()) {
+            return;
+        }
+        
+        String[] parts = line.split(DELIMITER);
+        
+        // Validate minimum parts
+        if (parts.length < 3) {
+            throw new RickshawException("Corrupted line (not enough fields): " + line);
+        }
+
+        String type = parts[0];
+        String status = parts[1]; // "1" for done, "0" for not done
+        String description = parts[2];
+        Task t = null;
+
+        switch (type) {
+        case "T":
+            t = new Todo(description);
+            break;
+        case "D":
+            if (parts.length < 4) {
+                throw new RickshawException("Corrupted deadline (missing date): " + line);
+            }
+            t = new Deadline(description, parts[3]);
+            break;
+        case "E":
+            if (parts.length < 5) {
+                throw new RickshawException("Corrupted event (missing times): " + line);
+            }
+            t = new Event(description, parts[3], parts[4]);
+            break;
+        default:
+            throw new RickshawException("Unknown task type: " + type);
+        }
+        if (status.equals("1")) {
+            t.markDone();
+        } else {
+            t.markUndone();
+        }
+        tasks.add(t);
+    }
+
+
+    public void save(ArrayList<Task> tasks) throws IOException {
+        try {
+            Path path = Paths.get(filePath);
+            Path directoryPath = path.getParent();
+            if (directoryPath != null) {
+                Files.createDirectories(directoryPath);
+            }
+
+            FileWriter writer = new FileWriter(filePath);
+
+            for (Task task : tasks) {
+                writer.write(task.toFileFormat() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+
+}
