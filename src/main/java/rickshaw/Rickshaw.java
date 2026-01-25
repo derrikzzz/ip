@@ -2,6 +2,8 @@ package rickshaw;
 
 import java.io.IOException;
 
+import rickshaw.commands.Command;
+import rickshaw.commands.ByeCommand;
 public class Rickshaw {
     private final Ui ui;
     private final Parser parser;
@@ -35,7 +37,7 @@ public class Rickshaw {
                 Command parsedCommand = parser.parse(command);
                 parsedCommand.run(tasks, ui, storage);
 
-                if (parsedCommand.getType() == CommandType.BYE) {
+                if (parsedCommand instanceof ByeCommand) {
                     isExit = true;
                 }
             } catch (RickshawException e) {
