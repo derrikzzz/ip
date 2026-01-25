@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
-    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 
     public Deadline(String description, String by) {
@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("D | %s | %s | %s", (isDone ? "1" : "0"), description, by.format(OUTPUT_FORMATTER));
+        return String.format("D | %s | %s | %s", (isDone ? "1" : "0"), description, by.format(INPUT_FORMATTER));
     }
 
 }
