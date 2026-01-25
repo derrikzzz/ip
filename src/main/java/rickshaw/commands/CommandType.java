@@ -1,0 +1,13 @@
+package rickshaw.commands;
+
+//Represent type of commnand
+public enum CommandType {
+    LIST,
+    MARK,
+    UNMARK,
+    DELETE,
+    TODO,
+    DEADLINE,
+    EVENT,
+    BYE,
+}
