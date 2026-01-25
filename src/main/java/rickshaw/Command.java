@@ -63,7 +63,7 @@ public class Command {
                 break;
         }
     }
-
+    //Command will decide whether to save tasks after each task change
     private void saveTasks(TaskList tasks, Storage storage, Ui ui) {
         try {
             storage.save(tasks.getTasks());
