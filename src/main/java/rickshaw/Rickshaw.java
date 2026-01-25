@@ -1,5 +1,7 @@
 package rickshaw;
 
+import java.io.IOException;
+
 public class Rickshaw {
     private final Ui ui;
     private final Parser parser;
@@ -11,6 +13,16 @@ public class Rickshaw {
         this.parser = new Parser();
         this.tasks = new TaskList();
         this.storage = new Storage("data/rickshaw.txt");
+
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.showErrorMessage("Error loading tasks: " + e.getMessage());
+            this.tasks = new TaskList();
+        } catch (RickshawException e) {
+            ui.showErrorMessage("Corrupted data file: " + e.getMessage());
+            this.tasks = new TaskList();
+        }
     }
 
     public void run() {
