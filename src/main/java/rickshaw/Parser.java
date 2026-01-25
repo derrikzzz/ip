@@ -1,5 +1,15 @@
 package rickshaw;
 
+import rickshaw.commands.Command;
+import rickshaw.commands.MarkCommand;
+import rickshaw.commands.UnmarkCommand;
+import rickshaw.commands.DeleteCommand;
+import rickshaw.commands.TodoCommand;
+import rickshaw.commands.DeadlineCommand;
+import rickshaw.commands.EventCommand;
+import rickshaw.commands.ByeCommand;
+import rickshaw.commands.ListCommand;
+
 public class Parser {
     public Command parse(String input) throws RickshawException{
         String trimmedCommand = input.trim();
@@ -8,13 +18,13 @@ public class Parser {
 
         switch (commandWord) {
             case "MARK" -> {
-                return new Command(CommandType.MARK, new String[]{parts[1]});
+                return new MarkCommand(Integer.parseInt(parts[1]));
             }
             case "UNMARK" -> {
-                return new Command(CommandType.UNMARK, new String[]{parts[1]});
+                return new UnmarkCommand(Integer.parseInt(parts[1]));
             }
             case "DELETE" -> {
-                return new Command(CommandType.DELETE, new String[]{parts[1]});
+                return new DeleteCommand(Integer.parseInt(parts[1]));
             }
             case "TODO" -> {
                 return parseTodo(trimmedCommand);
@@ -26,10 +36,10 @@ public class Parser {
                 return parseEvent(trimmedCommand);
             }
             case "BYE" -> {
-                return new Command(CommandType.BYE);
+                return new ByeCommand();
             }
             case "LIST" -> {
-                return new Command(CommandType.LIST);
+                return new ListCommand();
             }
             default -> {
                 throw new RickshawException("I do not understand this command...");
@@ -42,7 +52,7 @@ public class Parser {
         if (description.isEmpty()) {
             throw new RickshawException("Are you sure you want to add a todo task, the description of a todo task cannot be empty");
         }
-        return new Command(CommandType.TODO, new String[]{description});
+        return new TodoCommand(description);
     }
 
     private Command parseDeadline(String trimmedCommand) throws RickshawException {
@@ -54,7 +64,7 @@ public class Parser {
         }
         String description = segments[0];
         String doneBy = segments[1];
-        return new Command(CommandType.DEADLINE, new String[]{description, doneBy});
+        return new DeadlineCommand(description, doneBy);
     }
 
     private Command parseEvent(String trimmedCommand) throws RickshawException {
@@ -74,7 +84,7 @@ public class Parser {
         String from = timeSplit[0];
         String to = timeSplit[1];
 
-        return new Command(CommandType.EVENT, new String[]{description, from, to});
+        return new EventCommand(description, from, to);
     }
 
 
