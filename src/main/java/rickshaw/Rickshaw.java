@@ -11,7 +11,6 @@ public class Rickshaw {
     public Rickshaw(String name) {
         this.ui = new Ui(name);
         this.parser = new Parser();
-        this.tasks = new TaskList();
         this.storage = new Storage("data/rickshaw.txt");
 
         try {
