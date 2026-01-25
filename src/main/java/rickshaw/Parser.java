@@ -47,7 +47,7 @@ public class Parser {
         }
     }
 
-    private Command parseTodo(String trimmedCommand) throws RickshawException {
+    public Command parseTodo(String trimmedCommand) throws RickshawException {
         String description = trimmedCommand.substring(4).trim();
         if (description.isEmpty()) {
             throw new RickshawException("Are you sure you want to add a todo task, the description of a todo task cannot be empty");
@@ -55,7 +55,7 @@ public class Parser {
         return new TodoCommand(description);
     }
 
-    private Command parseDeadline(String trimmedCommand) throws RickshawException {
+    public Command parseDeadline(String trimmedCommand) throws RickshawException {
         // Example of input: "deadline return book /by Sunday"
         String payload = trimmedCommand.substring(8).trim();
         String[] segments = payload.split(" /by ");
@@ -67,7 +67,7 @@ public class Parser {
         return new DeadlineCommand(description, doneBy);
     }
 
-    private Command parseEvent(String trimmedCommand) throws RickshawException {
+    public Command parseEvent(String trimmedCommand) throws RickshawException {
         String payload = trimmedCommand.substring(5).trim();
         String[] fromSplit = payload.split(" /from ");
         if (fromSplit.length < 2) {
