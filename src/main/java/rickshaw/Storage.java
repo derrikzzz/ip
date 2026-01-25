@@ -40,7 +40,16 @@ public class Storage {
     }
 
     private void process(String line, ArrayList<Task> tasks) throws RickshawException {
+        if (line.trim().isEmpty()) {
+            return;
+        }
+        
         String[] parts = line.split(DELIMITER);
+        
+        // Validate minimum parts
+        if (parts.length < 3) {
+            throw new RickshawException("Corrupted line (not enough fields): " + line);
+        }
 
         String type = parts[0];
         String status = parts[1]; // "1" for done, "0" for not done
@@ -48,17 +57,23 @@ public class Storage {
         Task t = null;
 
         switch (type) {
-            case "T":
-                t = new Todo(description);
-                break;
-            case "D":
-                t = new Deadline(description, parts[3]);
-                break;
-            case "E":
-                t = new Event(description, parts[3], parts[4]);
-                break;
-            default:
-                throw new RickshawException("Unknown task type: " + type);
+        case "T":
+            t = new Todo(description);
+            break;
+        case "D":
+            if (parts.length < 4) {
+                throw new RickshawException("Corrupted deadline (missing date): " + line);
+            }
+            t = new Deadline(description, parts[3]);
+            break;
+        case "E":
+            if (parts.length < 5) {
+                throw new RickshawException("Corrupted event (missing times): " + line);
+            }
+            t = new Event(description, parts[3], parts[4]);
+            break;
+        default:
+            throw new RickshawException("Unknown task type: " + type);
         }
         if (status.equals("1")) {
             t.markDone();
