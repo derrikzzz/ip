@@ -22,12 +22,19 @@ public class Ui {
         return "bye";
     }
 
+    /**
+     * Formats the message to be displayed
+     * @param message
+     */
     private void format(String message) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("     " + message.replace("\n", "\n     "));
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Shows welcome message
+     */
     public void showWelcomeMessage() {
         String welcomeMessage;
         welcomeMessage = String.format(
@@ -36,29 +43,49 @@ public class Ui {
         );
         format(welcomeMessage);
     }
-
+    /**
+     * Shows exit message
+     */
     public void showExitMessage() {
         String exitMessage;
         exitMessage = "Bye. Hope to see you again soon!";
         format(exitMessage);
     }
 
+    /**
+     * Shows error message
+     * @param errorMessage
+     */
     public void showErrorMessage(String errorMessage) {
         format(errorMessage);
     }
 
+    /**
+     * Shows task added message
+     * @param task
+     * @param totalTasks
+     */
     public void showTaskAdded(Task task, int totalTasks) {
         format("Got it. I've added this task:\n" +
                 "       " + task + "\n" +
                 "     Now you have " + totalTasks + " tasks in the list.");
     }
 
+    /**
+     * Shows task deleted message
+     * @param task
+     * @param totalTasks
+     */
     public void showTaskDeleted(Task task, int totalTasks) {
         format("Noted. I've removed this task:\n" +
                 "       " + task + "\n" +
                 "     Now you have " + totalTasks + " tasks in the list.");
     }
 
+    /**
+     * Shows list of tasks
+     * @param tasks
+     */
     public void showList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             format("Your list is currently empty.");
@@ -73,14 +100,18 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public void showEchoMessage(String input) {
-        format(input);
-    }
-
+    /**
+     * Shows marked task message
+     * @param task
+     */
     public void showMarkedTask(Task task) {
         format("Nice! I've marked this task as done:\n       " + task);
     }
 
+    /**
+     * Shows unmarked task message
+     * @param task
+     */
     public void showUnmarkedTask(Task task) {
         format("OK, I've marked this task as not done yet:\n       " + task);
     }
