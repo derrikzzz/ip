@@ -9,6 +9,7 @@ import rickshaw.commands.DeadlineCommand;
 import rickshaw.commands.EventCommand;
 import rickshaw.commands.ByeCommand;
 import rickshaw.commands.ListCommand;
+import rickshaw.commands.FindCommand;
 
 
 /**
@@ -50,6 +51,12 @@ public class Parser {
             }
             case "LIST" -> {
                 return new ListCommand();
+            }
+            case "FIND" -> {
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new RickshawException("Please provide a keyword to search for. Usage: find <keyword>");
+                }
+                return new FindCommand(parts[1].trim());
             }
             default -> {
                 throw new RickshawException("I do not understand this command...");

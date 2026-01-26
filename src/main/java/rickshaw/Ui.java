@@ -101,6 +101,27 @@ public class Ui {
     }
 
     /**
+     * Shows list of matching tasks
+     * @param tasks
+     */
+    public void showFind(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            format("No tasks found.");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(HORIZONTAL_LINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + tasks.get(i));
+        }
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    public void showEchoMessage(String input) {
+        format(input);
+    }
+
+    /**
      * Shows marked task message
      * @param task
      */
@@ -115,5 +136,4 @@ public class Ui {
     public void showUnmarkedTask(Task task) {
         format("OK, I've marked this task as not done yet:\n       " + task);
     }
-
 }
