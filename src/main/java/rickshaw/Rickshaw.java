@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import rickshaw.commands.Command;
 import rickshaw.commands.ByeCommand;
+
 public class Rickshaw {
     private final Ui ui;
     private final Parser parser;
