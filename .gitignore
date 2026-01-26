@@ -13,5 +13,15 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Gradle caches/daemon/native (if in project root)
+/caches/
+/daemon/
+/native/
+/wrapper/
+
+
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+/META-INF/MANIFEST.MF
+*.jar

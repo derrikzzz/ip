@@ -13,6 +13,11 @@ import rickshaw.task.Deadline;
 import rickshaw.task.Event;
 import rickshaw.task.Task;
 import rickshaw.task.Todo;
+
+/**
+ * Represents the storage component
+ * Handles the loading and saving of tasks to a file (in data/rickshaw.txt)
+ */
 public class Storage {
     private static final String DELIMITER = " \\| ";
     protected String filePath;
@@ -20,7 +25,11 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-
+    /**
+     * Loads the tasks from the file (in data/rickshaw.txt)
+     * @return The list of tasks
+     * @throws RickshawException If the file exists but cannot be read or parsed.
+     */
     public ArrayList<Task> load() throws IOException, RickshawException {
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -39,6 +48,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Process line from the file and add to the task list
+     * @param line
+     * @param tasks
+     * @throws RickshawException
+     */
     private void process(String line, ArrayList<Task> tasks) throws RickshawException {
         if (line.trim().isEmpty()) {
             return;
@@ -83,7 +98,11 @@ public class Storage {
         tasks.add(t);
     }
 
-
+    /**
+     * Saves the tasks to the file (in data/rickshaw.txt)
+     * @param tasks The list of tasks to save
+     * @throws IOException If the file cannot be written
+     */
     public void save(ArrayList<Task> tasks) throws IOException {
         try {
             Path path = Paths.get(filePath);

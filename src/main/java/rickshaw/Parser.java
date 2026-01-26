@@ -10,8 +10,18 @@ import rickshaw.commands.EventCommand;
 import rickshaw.commands.ByeCommand;
 import rickshaw.commands.ListCommand;
 
+
+/**
+ * Parses inputs from user and returns appropriate Command object
+ */
 public class Parser {
-    public Command parse(String input) throws RickshawException {
+    /**
+     * Parses the input string from user and returns appropriate Command object
+     * @param input The input string from user
+     * @return Appropriate Command object
+     * @throws RickshawException If the input is invalid
+     */
+    public Command parse(String input) throws RickshawException{
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
@@ -47,6 +57,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses todo command from the input string.
+     * @param trimmedCommand The input string from user
+     * @return Appropriate Command object for todo task
+     * @throws RickshawException If the input is invalid
+     */
     public Command parseTodo(String trimmedCommand) throws RickshawException {
         String description = trimmedCommand.substring(4).trim();
         if (description.isEmpty()) {
@@ -54,6 +70,12 @@ public class Parser {
         }
         return new TodoCommand(description);
     }
+    /**
+     * Parses deadline command from the input string.
+     * @param trimmedCommand The input string from user
+     * @return Appropriate Command object for deadline task
+     * @throws RickshawException If the input is invalid
+     */
 
     public Command parseDeadline(String trimmedCommand) throws RickshawException {
         // Example of input: "deadline return book /by Sunday"
@@ -67,6 +89,12 @@ public class Parser {
         return new DeadlineCommand(description, doneBy);
     }
 
+    /**
+     * Parses event command from the input string.
+     * @param trimmedCommand The input string from user
+     * @return Appropriate Command object for event task
+     * @throws RickshawException If the input is invalid
+     */
     public Command parseEvent(String trimmedCommand) throws RickshawException {
         String payload = trimmedCommand.substring(5).trim();
         String[] fromSplit = payload.split(" /from ");
