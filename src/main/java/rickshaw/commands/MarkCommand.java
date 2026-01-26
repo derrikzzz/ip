@@ -6,17 +6,16 @@ import rickshaw.TaskList;
 import rickshaw.task.Task;
 
 public class MarkCommand extends Command {
+    private final int taskIndex;
 
-  private final int taskIndex;
+    public MarkCommand(int taskIndex) {
+        this.taskIndex = taskIndex;
+    }
 
-  public MarkCommand(int taskIndex) {
-    this.taskIndex = taskIndex;
-  }
-
-  @Override
-  public void run(TaskList tasks, Ui ui, Storage storage) {
-    Task markedtask = tasks.markTask(taskIndex);
-    ui.showMarkedTask(markedtask);
-    saveTasks(tasks, storage, ui);
-  }
+    @Override
+    public void run(TaskList tasks, Ui ui, Storage storage) {
+        Task markedTask = tasks.markTask(taskIndex);
+        ui.showMarkedTask(markedTask);
+        saveTasks(tasks, storage, ui);
+    }
 }

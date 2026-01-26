@@ -1,18 +1,18 @@
 package rickshaw;
 
-import java.util.ArrayList;
-import rickshaw.task.Task;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.io.File;
-import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import rickshaw.task.Todo;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import rickshaw.task.Deadline;
 import rickshaw.task.Event;
-
+import rickshaw.task.Task;
+import rickshaw.task.Todo;
 public class Storage {
     private static final String DELIMITER = " \\| ";
     protected String filePath;

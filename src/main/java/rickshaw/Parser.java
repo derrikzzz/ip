@@ -11,7 +11,7 @@ import rickshaw.commands.ByeCommand;
 import rickshaw.commands.ListCommand;
 
 public class Parser {
-    public Command parse(String input) throws RickshawException{
+    public Command parse(String input) throws RickshawException {
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
