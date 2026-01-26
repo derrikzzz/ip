@@ -1,6 +1,8 @@
 package rickshaw.commands;
 
-//Represent type of commnand
+/**
+ * Represents the type of command
+ */
 public enum CommandType {
     LIST,
     MARK,
