@@ -1,15 +1,11 @@
 package rickshaw;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import rickshaw.TaskList;
-import rickshaw.RickshawException;
 import rickshaw.commands.TodoCommand;
-import rickshaw.Ui;
-import rickshaw.Storage;
 
 public class TaskListTest {
     private TaskList taskList;

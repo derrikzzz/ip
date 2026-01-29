@@ -1,10 +1,10 @@
 package rickshaw;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import rickshaw.Parser;
-import rickshaw.RickshawException;
+
+import org.junit.jupiter.api.Test;
+
 import rickshaw.commands.Command;
 import rickshaw.commands.DeadlineCommand;
 
@@ -33,7 +33,8 @@ public class ParserTest {
             parser.parseDeadline(input);
             fail("Expected RickshawException to be thrown");
         } catch (RickshawException e) {
-            assertEquals("I recognise that you want to add a deadline task, but the format is incorrect. Usage: deadline <description> /by <time>", e.getMessage());
+            assertEquals("I recognise that you want to add a deadline task, but the format is incorrect. "
+                    + "Usage: deadline <description> /by <time>", e.getMessage());
         }
     }
 }
