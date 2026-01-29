@@ -1,44 +1,55 @@
 package rickshaw;
 
-import rickshaw.task.Task;
-
 import java.util.ArrayList;
 
+import rickshaw.task.Task;
 
 /**
- * Represents the task list
- * Handles adding, getting, marking, unmarking, deletion and retrieving size of task list
+ * Represents the task list.
+ * Handles adding, getting, marking, unmarking, deletion and retrieving size of task list.
  */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Constructs a TaskList with the specified tasks.
+     *
+     * @param tasks The list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
     /**
-     * Adds a task to the task list
-     * @param newTask
+     * Adds a task to the task list.
+     *
+     * @param newTask The task to add.
      */
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
     }
 
     /**
-     * Gets all tasks from the task list
-     * @return The list of tasks
+     * Gets all tasks from the task list.
+     *
+     * @return The list of tasks.
      */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
     /**
-     * Gets a task from the task list
-     * @param index The index of the task
-     * @return The task
+     * Gets a task from the task list.
+     *
+     * @param index The index of the task.
+     * @return The task.
      */
     public Task getTask(int index) {
         if (index >= 0 && index < tasks.size()) {
@@ -48,9 +59,10 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done
-     * @param index The index of the task
-     * @return The task
+     * Marks a task as done.
+     *
+     * @param index The index of the task.
+     * @return The task.
      */
     public Task markTask(int index) {
         Task task = this.getTask(index - 1);
@@ -59,9 +71,10 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as undone
-     * @param index The index of the task
-     * @return The task
+     * Marks a task as undone.
+     *
+     * @param index The index of the task.
+     * @return The task.
      */
     public Task unmarkTask(int index) {
         Task task = this.getTask(index - 1);
@@ -70,34 +83,38 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the task list
-     * @param index The index of the task
-     * @return The task
+     * Deletes a task from the task list.
+     *
+     * @param index The index of the task.
+     * @return The task.
      */
     public Task deleteTask(int index) {
         return this.tasks.remove(index - 1);
     }
 
     /**
-     * Gets the size of the task list
-     * @return The size of the task list
+     * Gets the size of the task list.
+     *
+     * @return The size of the task list.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Gets all tasks from the task list
-     * @return The list of tasks
+     * Gets all tasks from the task list.
+     *
+     * @return The list of tasks.
      */
     public ArrayList<Task> getAllTasks() {
         return this.tasks;
     }
 
     /**
-     * Finds tasks from the task list that contain the keyword
-     * @param keyword The keyword to search for
-     * @return The list of tasks that contain the keyword
+     * Finds tasks from the task list that contain the keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return The list of tasks that contain the keyword.
      */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();

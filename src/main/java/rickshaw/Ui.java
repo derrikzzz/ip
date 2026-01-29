@@ -1,20 +1,34 @@
 package rickshaw;
 
-import rickshaw.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import rickshaw.task.Task;
+
+/**
+ * Handles user interface interactions.
+ * Displays messages and reads user input.
+ */
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     protected String chatbotName;
     protected Scanner scanner;
 
+    /**
+     * Constructs a Ui object with the specified chatbot name.
+     *
+     * @param chatbotName The name of the chatbot.
+     */
     public Ui(String chatbotName) {
         this.scanner = new Scanner(System.in);
         this.chatbotName = chatbotName;
     }
 
+    /**
+     * Reads a command from the user.
+     *
+     * @return The command entered by the user.
+     */
     public String readCommand() {
         if (scanner.hasNextLine()) {
             return scanner.nextLine();
@@ -23,8 +37,9 @@ public class Ui {
     }
 
     /**
-     * Formats the message to be displayed
-     * @param message
+     * Formats the message to be displayed.
+     *
+     * @param message The message to format.
      */
     private void format(String message) {
         System.out.println(HORIZONTAL_LINE);
@@ -33,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Shows welcome message
+     * Shows welcome message.
      */
     public void showWelcomeMessage() {
         String welcomeMessage;
@@ -43,8 +58,9 @@ public class Ui {
         );
         format(welcomeMessage);
     }
+
     /**
-     * Shows exit message
+     * Shows exit message.
      */
     public void showExitMessage() {
         String exitMessage;
@@ -53,38 +69,42 @@ public class Ui {
     }
 
     /**
-     * Shows error message
-     * @param errorMessage
+     * Shows error message.
+     *
+     * @param errorMessage The error message to display.
      */
     public void showErrorMessage(String errorMessage) {
         format(errorMessage);
     }
 
     /**
-     * Shows task added message
-     * @param task
-     * @param totalTasks
+     * Shows task added message.
+     *
+     * @param task The task that was added.
+     * @param totalTasks The total number of tasks.
      */
     public void showTaskAdded(Task task, int totalTasks) {
-        format("Got it. I've added this task:\n" +
-                "       " + task + "\n" +
-                "     Now you have " + totalTasks + " tasks in the list.");
+        format("Got it. I've added this task:\n"
+                + "       " + task + "\n"
+                + "     Now you have " + totalTasks + " tasks in the list.");
     }
 
     /**
-     * Shows task deleted message
-     * @param task
-     * @param totalTasks
+     * Shows task deleted message.
+     *
+     * @param task The task that was deleted.
+     * @param totalTasks The total number of tasks.
      */
     public void showTaskDeleted(Task task, int totalTasks) {
-        format("Noted. I've removed this task:\n" +
-                "       " + task + "\n" +
-                "     Now you have " + totalTasks + " tasks in the list.");
+        format("Noted. I've removed this task:\n"
+                + "       " + task + "\n"
+                + "     Now you have " + totalTasks + " tasks in the list.");
     }
 
     /**
-     * Shows list of tasks
-     * @param tasks
+     * Shows list of tasks.
+     *
+     * @param tasks The list of tasks to display.
      */
     public void showList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
@@ -101,8 +121,9 @@ public class Ui {
     }
 
     /**
-     * Shows list of matching tasks
-     * @param tasks
+     * Shows list of matching tasks.
+     *
+     * @param tasks The list of matching tasks to display.
      */
     public void showFind(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
@@ -117,21 +138,28 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Shows echo message.
+     *
+     * @param input The input to echo.
+     */
     public void showEchoMessage(String input) {
         format(input);
     }
 
     /**
-     * Shows marked task message
-     * @param task
+     * Shows marked task message.
+     *
+     * @param task The task that was marked.
      */
     public void showMarkedTask(Task task) {
         format("Nice! I've marked this task as done:\n       " + task);
     }
 
     /**
-     * Shows unmarked task message
-     * @param task
+     * Shows unmarked task message.
+     *
+     * @param task The task that was unmarked.
      */
     public void showUnmarkedTask(Task task) {
         format("OK, I've marked this task as not done yet:\n       " + task);
