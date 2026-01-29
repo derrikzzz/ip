@@ -2,15 +2,24 @@ package rickshaw;
 
 import java.io.IOException;
 
-import rickshaw.commands.Command;
 import rickshaw.commands.ByeCommand;
+import rickshaw.commands.Command;
 
+/**
+ * Main class for the Rickshaw chatbot application.
+ * Handles initialization and main program loop.
+ */
 public class Rickshaw {
     private final Ui ui;
     private final Parser parser;
     private TaskList tasks;
     private final Storage storage;
-    
+
+    /**
+     * Constructs a Rickshaw chatbot with the specified name.
+     *
+     * @param name The name of the chatbot.
+     */
     public Rickshaw(String name) {
         this.ui = new Ui(name);
         this.parser = new Parser();
@@ -27,6 +36,9 @@ public class Rickshaw {
         }
     }
 
+    /**
+     * Runs the main program loop.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
@@ -47,9 +59,12 @@ public class Rickshaw {
         }
     }
 
+    /**
+     * Main entry point for the application.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Rickshaw("Rickshaw Bot").run();
     }
-
-
 }
