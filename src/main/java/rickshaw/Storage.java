@@ -15,19 +15,27 @@ import rickshaw.task.Task;
 import rickshaw.task.Todo;
 
 /**
- * Represents the storage component
- * Handles the loading and saving of tasks to a file (in data/rickshaw.txt)
+ * Represents the storage component.
+ * Handles the loading and saving of tasks to a file (in data/rickshaw.txt).
  */
 public class Storage {
     private static final String DELIMITER = " \\| ";
     protected String filePath;
 
+    /**
+     * Constructs a Storage object with the specified file path.
+     *
+     * @param filePath The path to the file where tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
     /**
-     * Loads the tasks from the file (in data/rickshaw.txt)
-     * @return The list of tasks
+     * Loads the tasks from the file (in data/rickshaw.txt).
+     *
+     * @return The list of tasks.
+     * @throws IOException If the file cannot be read.
      * @throws RickshawException If the file exists but cannot be read or parsed.
      */
     public ArrayList<Task> load() throws IOException, RickshawException {
@@ -36,7 +44,7 @@ public class Storage {
         if (!f.exists()) {
             return tasks;
         }
-        
+
         try (Scanner s = new Scanner(f)) {
             while (s.hasNext()) {
                 String line = s.nextLine();
@@ -49,18 +57,19 @@ public class Storage {
     }
 
     /**
-     * Process line from the file and add to the task list
-     * @param line
-     * @param tasks
-     * @throws RickshawException
+     * Process line from the file and add to the task list.
+     *
+     * @param line The line to process.
+     * @param tasks The task list to add to.
+     * @throws RickshawException If the line is corrupted.
      */
     private void process(String line, ArrayList<Task> tasks) throws RickshawException {
         if (line.trim().isEmpty()) {
             return;
         }
-        
+
         String[] parts = line.split(DELIMITER);
-        
+
         // Validate minimum parts
         if (parts.length < 3) {
             throw new RickshawException("Corrupted line (not enough fields): " + line);
@@ -99,9 +108,10 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks to the file (in data/rickshaw.txt)
-     * @param tasks The list of tasks to save
-     * @throws IOException If the file cannot be written
+     * Saves the tasks to the file (in data/rickshaw.txt).
+     *
+     * @param tasks The list of tasks to save.
+     * @throws IOException If the file cannot be written.
      */
     public void save(ArrayList<Task> tasks) throws IOException {
         try {
@@ -121,6 +131,4 @@ public class Storage {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
-
-
 }
