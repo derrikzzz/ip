@@ -10,7 +10,7 @@ import java.beans.Transient;
 import rickshaw.TaskList;
 import rickshaw.RickshawException;
 
-public class TaskList {
+public class TaskListTest {
   private TaskList taskList;
 
   @BeforeEach
