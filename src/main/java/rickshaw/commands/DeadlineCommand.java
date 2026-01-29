@@ -20,6 +20,14 @@ public class DeadlineCommand extends Command {
     this.by = by;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public String getBy() {
+    return by;
+  }
+
   /**
    * Adds a new deadline task to the task list, display task added message and save tasks to storage
    * @param tasks The task list

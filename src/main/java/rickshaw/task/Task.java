@@ -25,6 +25,10 @@ abstract public class Task {
         return this.description;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getIcon(), this.description);
