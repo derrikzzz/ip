@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import rickshaw.Parser;
 import rickshaw.RickshawException;
+import rickshaw.commands.Command;
+import rickshaw.commands.DeadlineCommand;
 
 public class ParserTest {
 
@@ -16,7 +18,7 @@ public class ParserTest {
     Command result = parser.parseDeadline(input);
 
     if (result instanceof DeadlineCommand) {
-      DeadlineCommand deadline = result;
+      DeadlineCommand deadline = (DeadlineCommand) result;
       assertEquals("return book", deadline.getDescription());
       assertEquals("Tuesday", deadline.getBy());
     }
