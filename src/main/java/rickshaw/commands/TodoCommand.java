@@ -35,4 +35,13 @@ public class TodoCommand extends Command {
         ui.showTaskAdded(newTodo, tasks.size());
         saveTasks(tasks, storage, ui);
     }
+
+    @Override
+    public String returnStringResponse(TaskList tasks, Storage storage) {
+        Task newTodo = new Todo(description);
+        tasks.addTask(newTodo);
+        saveTasks(tasks, storage);
+        return "Got it. I've added this task:\n  " + newTodo
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
 }

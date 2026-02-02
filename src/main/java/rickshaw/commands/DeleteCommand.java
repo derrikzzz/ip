@@ -26,4 +26,12 @@ public class DeleteCommand extends Command {
         ui.showTaskDeleted(deletedTask, tasks.size());
         saveTasks(tasks, storage, ui);
     }
+
+    @Override
+    public String returnStringResponse(TaskList tasks, Storage storage) {
+        Task deletedTask = tasks.deleteTask(taskIndex);
+        saveTasks(tasks, storage);
+        return "Noted. I've removed this task:\n  " + deletedTask
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
 }

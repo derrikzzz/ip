@@ -56,4 +56,13 @@ public class DeadlineCommand extends Command {
         ui.showTaskAdded(newDeadline, tasks.size());
         saveTasks(tasks, storage, ui);
     }
+
+    @Override
+    public String returnStringResponse(TaskList tasks, Storage storage) {
+        Task newDeadline = new Deadline(description, by);
+        tasks.addTask(newDeadline);
+        saveTasks(tasks, storage);
+        return "Got it. I've added this task:\n  " + newDeadline
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
 }

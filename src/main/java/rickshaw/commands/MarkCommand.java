@@ -33,4 +33,11 @@ public class MarkCommand extends Command {
         ui.showMarkedTask(markedtask);
         saveTasks(tasks, storage, ui);
     }
+
+    @Override
+    public String returnStringResponse(TaskList tasks, Storage storage) {
+        Task markedTask = tasks.markTask(taskIndex);
+        saveTasks(tasks, storage);
+        return "Nice! I've marked this task as done:\n  " + markedTask;
+    }
 }
