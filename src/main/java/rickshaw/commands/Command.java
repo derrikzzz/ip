@@ -2,6 +2,7 @@ package rickshaw.commands;
 
 import java.io.IOException;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -22,6 +23,19 @@ public abstract class Command {
     public abstract void run(TaskList tasks, Ui ui, Storage storage);
 
     /**
+     * Return response string for GUI
+     * Conrete impelementation delegated to subclasses.
+     * 
+     * @param tasks
+     * @param storage
+     * @param ui
+     */
+
+    public abstract String returnStringResponse(TaskList tasks, Storage storage);
+
+
+
+    /**
      * Saves the current task list to storage. (in data/rickshaw.txt)
      *
      * @param tasks   The task list to save.
@@ -33,6 +47,20 @@ public abstract class Command {
             storage.save(tasks.getTasks());
         } catch (IOException e) {
             ui.showErrorMessage("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Saves the current task list to storage. (in data/rickshaw.txt) for the GUI
+     *
+     * @param tasks   The task list to save.
+     * @param storage The storage component.
+     */
+    protected void saveTasks(TaskList tasks, Storage storage) {
+        try {
+            storage.save(tasks.getTasks());
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
 }
