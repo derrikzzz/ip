@@ -51,18 +51,26 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
-        Task newDeadline = new Deadline(description, by);
-        tasks.addTask(newDeadline);
-        ui.showTaskAdded(newDeadline, tasks.size());
-        saveTasks(tasks, storage, ui);
+        try {
+            Task newDeadline = new Deadline(description, by);
+            tasks.addTask(newDeadline);
+            ui.showTaskAdded(newDeadline, tasks.size());
+            saveTasks(tasks, storage, ui);
+        } catch (IllegalArgumentException e) {
+            ui.showErrorMessage(e.getMessage());
+        }
     }
 
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
-        Task newDeadline = new Deadline(description, by);
-        tasks.addTask(newDeadline);
-        saveTasks(tasks, storage);
-        return "Got it. I've added this task:\n  " + newDeadline
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        try {
+            Task newDeadline = new Deadline(description, by);
+            tasks.addTask(newDeadline);
+            saveTasks(tasks, storage);
+            return "Got it. I've added this task:\n  " + newDeadline
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+        } catch (IllegalArgumentException e) {
+            return "Error: " + e.getMessage();
+        }
     }
 }
