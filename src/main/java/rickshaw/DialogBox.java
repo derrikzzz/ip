@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the right and text on the left.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -46,12 +46,14 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String input, Image userImage) {
         var db = new DialogBox(input, userImage);
         db.setAlignment(Pos.TOP_LEFT);
+        db.dialog.setStyle("-fx-background-color: #d1f2eb; -fx-background-radius: 10; -fx-padding: 10; -fx-font-size: 13px;");
         return db;
     }
 
     public static DialogBox getRickshawDialog(String response, Image rickshawImage) {
         var db = new DialogBox(response, rickshawImage);
         db.flip();
+        db.dialog.setStyle("-fx-background-color: #e1f5fe; -fx-background-radius: 10; -fx-padding: 10; -fx-font-size: 13px;");
         return db;
     }
 }
