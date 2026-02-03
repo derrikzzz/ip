@@ -29,10 +29,22 @@ public class Parser {
 
         switch (commandWord) {
         case "MARK":
+            if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                throw new RickshawException(
+                        "Please provide a task number to mark. Usage: mark <task number>");
+            }
             return new MarkCommand(Integer.parseInt(parts[1]));
         case "UNMARK":
+            if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                throw new RickshawException(
+                        "Please provide a task number to unmark. Usage: unmark <task number>");
+            }
             return new UnmarkCommand(Integer.parseInt(parts[1]));
         case "DELETE":
+            if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                throw new RickshawException(
+                        "Please provide a task number to delete. Usage: delete <task number>");
+            }
             return new DeleteCommand(Integer.parseInt(parts[1]));
         case "TODO":
             return parseTodo(trimmedCommand);

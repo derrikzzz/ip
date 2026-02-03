@@ -60,6 +60,21 @@ public class Rickshaw {
     }
 
     /**
+     * Generates a response for the user's input.
+     *
+     * @param input The user's input string.
+     * @return The response string from Rickshaw.
+     */
+    public String getResponse(String input) {
+        try {
+            Command parsedCommand = parser.parse(input);
+            return parsedCommand.returnStringResponse(tasks, storage);
+        } catch (RickshawException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
      * Main entry point for the application.
      *
      * @param args Command line arguments.
