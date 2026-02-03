@@ -2,6 +2,7 @@ package rickshaw.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline task with a due date.
@@ -16,10 +17,18 @@ public class Deadline extends Task {
      *
      * @param description The description of the deadline.
      * @param by The due date string in format "d/MM/yyyy HHmm".
+     * @throws IllegalArgumentException if the date format is invalid.
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by, INPUT_FORMATTER);
+        try {
+            this.by = LocalDateTime.parse(by, INPUT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(
+                "Invalid date format: '" + by + "'. Please use the format: d/MM/yyyy HHmm (e.g., 1/12/2024 1800)",
+                e
+            );
+        }
     }
 
     @Override
