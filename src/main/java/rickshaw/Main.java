@@ -1,14 +1,18 @@
 package rickshaw;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.IOException;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+/**
+ * Main class for the Rickshaw application.
+ */
 public class Main extends Application {
-    private Rickshaw rickshaw = new Rickshaw("Rickshaw");    
+    private Rickshaw rickshaw = new Rickshaw("Rickshaw");
 
     @Override
     public void start(Stage stage) {
