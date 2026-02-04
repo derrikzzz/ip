@@ -1,0 +1,13 @@
+.user_dialog_box {
+    background-color: #d1f2eb;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.rickshaw_dialog_box {
+    background-color: #e1f5fe;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+}
