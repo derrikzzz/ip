@@ -125,7 +125,7 @@ public class Ui {
      *
      * @param tasks The list of matching tasks to display.
      */
-    public void showFind(ArrayList<Task> tasks) {
+    public void showFindResults(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             format("No tasks found.");
             return;
