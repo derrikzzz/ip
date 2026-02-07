@@ -26,26 +26,15 @@ public class Parser {
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
+        String argument = parts.length > 1 ? parts[1].trim() : "";
 
         switch (commandWord) {
         case "MARK":
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new RickshawException(
-                        "Please provide a task number to mark. Usage: mark <task number>");
-            }
-            return new MarkCommand(Integer.parseInt(parts[1]));
+            return parseMark(argument);
         case "UNMARK":
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new RickshawException(
-                        "Please provide a task number to unmark. Usage: unmark <task number>");
-            }
-            return new UnmarkCommand(Integer.parseInt(parts[1]));
+            return parseUnmark(argument);
         case "DELETE":
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new RickshawException(
-                        "Please provide a task number to delete. Usage: delete <task number>");
-            }
-            return new DeleteCommand(Integer.parseInt(parts[1]));
+            return parseDelete(argument);
         case "TODO":
             return parseTodo(trimmedCommand);
         case "DEADLINE":
@@ -57,14 +46,42 @@ public class Parser {
         case "LIST":
             return new ListCommand();
         case "FIND":
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new RickshawException(
-                        "Please provide a keyword to search for. Usage: find <keyword>");
-            }
-            return new FindCommand(parts[1].trim());
+            return parseFind(argument);
         default:
             throw new RickshawException("I do not understand this command...");
         }
+    }
+
+    private Command parseMark(String argument) throws RickshawException {
+        if (argument.isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a task number to mark. Usage: mark <task number>");
+        }
+        return new MarkCommand(Integer.parseInt(argument));
+    }
+
+    private Command parseUnmark(String argument) throws RickshawException {
+        if (argument.isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a task number to unmark. Usage: unmark <task number>");
+        }
+        return new UnmarkCommand(Integer.parseInt(argument));
+    }
+
+    private Command parseDelete(String argument) throws RickshawException {
+        if (argument.isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a task number to delete. Usage: delete <task number>");
+        }
+        return new DeleteCommand(Integer.parseInt(argument));
+    }
+
+    private Command parseFind(String argument) throws RickshawException {
+        if (argument.isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a keyword to search for. Usage: find <keyword>");
+        }
+        return new FindCommand(argument);
     }
 
     /**
