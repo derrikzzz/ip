@@ -1,11 +1,15 @@
 package rickshaw.task;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Represents an abstract task with a description and completion status.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected Set<String> tags;
 
     /**
      * Constructs a Task with the specified description.
@@ -15,6 +19,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tags = new HashSet<>();
     }
 
     /**
@@ -58,9 +63,51 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Gets the tags of the task.
+     *
+     * @return The tags.
+     */
+    public Set<String> getTags() {
+        return this.tags;
+    }
+
+    /**
+     * Adds a tag to the task.
+     *
+     * @param tag The tag to add.
+     * @return The tags.
+     */
+    public Set<String> addTag(String tag) {
+        this.tags.add(tag);
+        return this.tags;
+    }
+
+    /**
+     * Removes a tag from the task.
+     *
+     * @param tag The tag to remove.
+     * @return The tags.
+     */
+    public Set<String> removeTag(String tag) {
+        this.tags.remove(tag);
+        return this.tags;
+    }
+
+    /**
+     * Sets the tags of the task.
+     *
+     * @param tags The tags to set.
+     * @return The tags.
+     */
+    public Set<String> setTags(Set<String> tags) {
+        this.tags = tags;
+        return this.tags;
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getIcon(), this.description);
+        return String.format("[%s] %s %s", this.getIcon(), this.description, this.tags);
     }
 
     /**
