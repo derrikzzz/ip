@@ -11,6 +11,8 @@ import rickshaw.task.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String INDENT = "     ";
+    private static final String TASK_INDENT = "       ";
     protected String chatbotName;
     protected Scanner scanner;
 
@@ -43,7 +45,7 @@ public class Ui {
      */
     private void format(String message) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println("     " + message.replace("\n", "\n     "));
+        System.out.println(INDENT + message.replace("\n", "\n" + INDENT));
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -85,8 +87,8 @@ public class Ui {
      */
     public void showTaskAdded(Task task, int totalTasks) {
         format("Got it. I've added this task:\n"
-                + "       " + task + "\n"
-                + "     Now you have " + totalTasks + " tasks in the list.");
+                + TASK_INDENT + task + "\n"
+                + INDENT + "Now you have " + totalTasks + " tasks in the list.");
     }
 
     /**
@@ -153,7 +155,7 @@ public class Ui {
      * @param task The task that was marked.
      */
     public void showMarkedTask(Task task) {
-        format("Nice! I've marked this task as done:\n       " + task);
+        format("Nice! I've marked this task as done:\n" + TASK_INDENT + task);
     }
 
     /**
@@ -162,6 +164,6 @@ public class Ui {
      * @param task The task that was unmarked.
      */
     public void showUnmarkedTask(Task task) {
-        format("OK, I've marked this task as not done yet:\n       " + task);
+        format("OK, I've marked this task as not done yet:\n" + TASK_INDENT + task);
     }
 }
