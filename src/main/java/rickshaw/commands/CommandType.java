@@ -12,4 +12,5 @@ public enum CommandType {
     DEADLINE,
     EVENT,
     BYE,
+    FIND,
 }
