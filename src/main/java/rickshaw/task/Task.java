@@ -107,7 +107,11 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s %s", this.getIcon(), this.description, this.tags);
+        String tagString = tags.isEmpty() ? "" : " " + tags.stream()
+                .map(tag -> "#" + tag)
+                .reduce((t1, t2) -> t1 + " " + t2)
+                .orElse("");
+        return String.format("[%s] %s%s", this.getIcon(), this.description, tagString);
     }
 
     /**
