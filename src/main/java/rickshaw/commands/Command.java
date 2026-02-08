@@ -2,7 +2,6 @@ package rickshaw.commands;
 
 import java.io.IOException;
 
-import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -25,15 +24,12 @@ public abstract class Command {
     /**
      * Return response string for GUI
      * Conrete impelementation delegated to subclasses.
-     * 
+     *
      * @param tasks
      * @param storage
-     * @param ui
      */
 
     public abstract String returnStringResponse(TaskList tasks, Storage storage);
-
-
 
     /**
      * Saves the current task list to storage. (in data/rickshaw.txt)
