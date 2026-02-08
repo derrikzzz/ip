@@ -79,6 +79,9 @@ public abstract class Task {
      * @return The tags.
      */
     public Set<String> addTag(String tag) {
+        if (tag.contains("|") || tag.contains(",")) {
+            throw new IllegalArgumentException("Tag cannot contain '|' or ',' characters.");
+        }
         this.tags.add(tag);
         return this.tags;
     }
