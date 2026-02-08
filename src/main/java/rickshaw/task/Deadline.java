@@ -37,8 +37,8 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("D | %s | %s | %s | %s", (isDone ? "1" : "0"),
-                description, by.format(INPUT_FORMATTER),
-                String.join(",", tags));
+        String base = String.format("D | %s | %s | %s", (isDone ? "1" : "0"),
+                description, by.format(INPUT_FORMATTER));
+        return tags.isEmpty() ? base : base + " | " + String.join(",", tags);
     }
 }
