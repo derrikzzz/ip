@@ -15,6 +15,10 @@ import rickshaw.commands.UnmarkCommand;
  * Parses inputs from user and returns appropriate Command object.
  */
 public class Parser {
+    private static final int TODO_COMMAND_LENGTH = "todo".length();
+    private static final int EVENT_COMMAND_LENGTH = "event".length();
+    private static final int DEADLINE_COMMAND_LENGTH = "deadline".length();
+    private static final int MIN_SEGMENT_COUNT = 2;
     /**
      * Parses the input string from user and returns appropriate Command object.
      *
@@ -92,7 +96,7 @@ public class Parser {
      * @throws RickshawException If the input is invalid.
      */
     public Command parseTodo(String trimmedCommand) throws RickshawException {
-        String description = trimmedCommand.substring(4).trim();
+        String description = trimmedCommand.substring(TODO_COMMAND_LENGTH).trim();
         if (description.isEmpty()) {
             throw new RickshawException(
                     "Are you sure you want to add a todo task, "
@@ -110,9 +114,9 @@ public class Parser {
      */
     public Command parseDeadline(String trimmedCommand) throws RickshawException {
         // Example of input: "deadline return book /by Sunday"
-        String payload = trimmedCommand.substring(8).trim();
+        String payload = trimmedCommand.substring(DEADLINE_COMMAND_LENGTH).trim();
         String[] segments = payload.split(" /by ");
-        if (segments.length < 2) {
+        if (segments.length < MIN_SEGMENT_COUNT) {
             throw new RickshawException(
                     "I recognise that you want to add a deadline task, but the format is incorrect. "
                     + "Usage: deadline <description> /by <time>");
@@ -130,9 +134,9 @@ public class Parser {
      * @throws RickshawException If the input is invalid.
      */
     public Command parseEvent(String trimmedCommand) throws RickshawException {
-        String payload = trimmedCommand.substring(5).trim();
+        String payload = trimmedCommand.substring(EVENT_COMMAND_LENGTH).trim();
         String[] fromSplit = payload.split(" /from ");
-        if (fromSplit.length < 2) {
+        if (fromSplit.length < MIN_SEGMENT_COUNT) {
             throw new RickshawException(
                     "I recognise that you want to add an event task, but the format is incorrect. "
                     + "Usage: event <description> /from <start> /to <end>");
@@ -142,7 +146,7 @@ public class Parser {
         String timeInfo = fromSplit[1];
 
         String[] timeSplit = timeInfo.split(" /to ");
-        if (timeSplit.length < 2) {
+        if (timeSplit.length < MIN_SEGMENT_COUNT) {
             throw new RickshawException(
                     "I recognise that you want to add an event task, but the format is incorrect. "
                     + "Usage: event <description> /from <start> /to <end>");
