@@ -11,6 +11,8 @@ import rickshaw.task.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String INDENT = "     ";
+    private static final String TASK_INDENT = "       ";
     protected String chatbotName;
     protected Scanner scanner;
 
@@ -43,7 +45,7 @@ public class Ui {
      */
     private void format(String message) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println("     " + message.replace("\n", "\n     "));
+        System.out.println(INDENT + message.replace("\n", "\n" + INDENT));
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -85,8 +87,8 @@ public class Ui {
      */
     public void showTaskAdded(Task task, int totalTasks) {
         format("Got it. I've added this task:\n"
-                + "       " + task + "\n"
-                + "     Now you have " + totalTasks + " tasks in the list.");
+                + TASK_INDENT + task + "\n"
+                + INDENT + "Now you have " + totalTasks + " tasks in the list.");
     }
 
     /**
@@ -97,8 +99,23 @@ public class Ui {
      */
     public void showTaskDeleted(Task task, int totalTasks) {
         format("Noted. I've removed this task:\n"
-                + "       " + task + "\n"
-                + "     Now you have " + totalTasks + " tasks in the list.");
+                + TASK_INDENT + task + "\n"
+                + INDENT + "Now you have " + totalTasks + " tasks in the list.");
+    }
+
+    /**
+     * Shows a numbered list of tasks with a header message.
+     *
+     * @param header The header message to display above the list.
+     * @param tasks The list of tasks to display.
+     */
+    private void showNumberedTaskList(String header, ArrayList<Task> tasks) {
+        System.out.println(header);
+        System.out.println(HORIZONTAL_LINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(INDENT + (i + 1) + "." + tasks.get(i));
+        }
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -111,13 +128,7 @@ public class Ui {
             format("Your list is currently empty.");
             return;
         }
-
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(HORIZONTAL_LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
+        showNumberedTaskList("Here are the tasks in your list:", tasks);
     }
 
     /**
@@ -125,17 +136,12 @@ public class Ui {
      *
      * @param tasks The list of matching tasks to display.
      */
-    public void showFind(ArrayList<Task> tasks) {
+    public void showFindResults(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             format("No tasks found.");
             return;
         }
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(HORIZONTAL_LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
+        showNumberedTaskList("Here are the matching tasks in your list:", tasks);
     }
 
     /**
@@ -153,7 +159,7 @@ public class Ui {
      * @param task The task that was marked.
      */
     public void showMarkedTask(Task task) {
-        format("Nice! I've marked this task as done:\n       " + task);
+        format("Nice! I've marked this task as done:\n" + TASK_INDENT + task);
     }
 
     /**
@@ -162,6 +168,6 @@ public class Ui {
      * @param task The task that was unmarked.
      */
     public void showUnmarkedTask(Task task) {
-        format("OK, I've marked this task as not done yet:\n       " + task);
+        format("OK, I've marked this task as not done yet:\n" + TASK_INDENT + task);
     }
 }

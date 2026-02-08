@@ -29,8 +29,8 @@ public class MarkCommand extends Command {
      */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
-        Task markedtask = tasks.markTask(taskIndex);
-        ui.showMarkedTask(markedtask);
+        Task markedTask = tasks.markTask(taskIndex);
+        ui.showMarkedTask(markedTask);
         saveTasks(tasks, storage, ui);
     }
 
