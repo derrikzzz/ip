@@ -20,6 +20,6 @@ public class Todo extends Task {
 
     @Override
     public String toFileFormat() {
-        return "T | " + (isDone ? "1" : "0") + " | " + description;
+        return "T | " + (isDone ? "1" : "0") + " | " + description + " | " + String.join(",", tags);
     }
 }

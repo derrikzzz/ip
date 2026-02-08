@@ -11,7 +11,6 @@ public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
     protected LocalDateTime by;
-
     /**
      * Constructs a Deadline task with the specified description and due date.
      *
@@ -38,6 +37,8 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("D | %s | %s | %s", (isDone ? "1" : "0"), description, by.format(INPUT_FORMATTER));
+        return String.format("D | %s | %s | %s | %s", (isDone ? "1" : "0"),
+                description, by.format(INPUT_FORMATTER),
+                String.join(",", tags));
     }
 }
