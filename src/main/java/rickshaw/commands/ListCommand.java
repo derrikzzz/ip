@@ -30,12 +30,7 @@ public class ListCommand extends Command {
             return "Your list is currently empty.";
         }
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < taskList.size(); i++) {
-            sb.append(i + 1).append(". ").append(taskList.get(i));
-            if (i < taskList.size() - 1) {
-                sb.append("\n");
-            }
-        }
+        taskList.stream().forEach(task -> sb.append(task.toString()).append("\n"));
         return sb.toString();
     }
 }
