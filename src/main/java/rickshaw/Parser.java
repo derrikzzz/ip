@@ -8,8 +8,10 @@ import rickshaw.commands.EventCommand;
 import rickshaw.commands.FindCommand;
 import rickshaw.commands.ListCommand;
 import rickshaw.commands.MarkCommand;
+import rickshaw.commands.TagCommand;
 import rickshaw.commands.TodoCommand;
 import rickshaw.commands.UnmarkCommand;
+import rickshaw.commands.UntagCommand;
 
 /**
  * Parses inputs from user and returns appropriate Command object.
@@ -51,6 +53,10 @@ public class Parser {
             return new ListCommand();
         case "FIND":
             return parseFind(argument);
+        case "TAG":
+            return parseTag(argument);
+        case "UNTAG":
+            return parseUntag(argument);
         default:
             throw new RickshawException("I do not understand this command...");
         }
@@ -86,6 +92,38 @@ public class Parser {
                     "Please provide a keyword to search for. Usage: find <keyword>");
         }
         return new FindCommand(argument);
+    }
+
+    private Command parseTag(String argument) throws RickshawException {
+        String[] parts = argument.split(" ", 2);
+        if (parts.length < MIN_SEGMENT_COUNT || parts[1].trim().isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a task number and tag. Usage: tag <task number> <tag>");
+        }
+        try {
+            int taskIndex = Integer.parseInt(parts[0]);
+            String tag = parts[1].trim();
+            return new TagCommand(taskIndex, tag);
+        } catch (NumberFormatException e) {
+            throw new RickshawException(
+                    "'" + parts[0] + "' is not a valid task number. Usage: tag <task number> <tag>");
+        }
+    }
+
+    private Command parseUntag(String argument) throws RickshawException {
+        String[] parts = argument.split(" ", 2);
+        if (parts.length < MIN_SEGMENT_COUNT || parts[1].trim().isEmpty()) {
+            throw new RickshawException(
+                    "Please provide a task number and tag. Usage: untag <task number> <tag>");
+        }
+        try {
+            int taskIndex = Integer.parseInt(parts[0]);
+            String tag = parts[1].trim();
+            return new UntagCommand(taskIndex, tag);
+        } catch (NumberFormatException e) {
+            throw new RickshawException(
+                    "'" + parts[0] + "' is not a valid task number. Usage: untag <task number> <tag>");
+        }
     }
 
     /**
