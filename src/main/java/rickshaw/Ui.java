@@ -99,8 +99,23 @@ public class Ui {
      */
     public void showTaskDeleted(Task task, int totalTasks) {
         format("Noted. I've removed this task:\n"
-                + "       " + task + "\n"
-                + "     Now you have " + totalTasks + " tasks in the list.");
+                + TASK_INDENT + task + "\n"
+                + INDENT + "Now you have " + totalTasks + " tasks in the list.");
+    }
+
+    /**
+     * Shows a numbered list of tasks with a header message.
+     *
+     * @param header The header message to display above the list.
+     * @param tasks The list of tasks to display.
+     */
+    private void showNumberedTaskList(String header, ArrayList<Task> tasks) {
+        System.out.println(header);
+        System.out.println(HORIZONTAL_LINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(INDENT + (i + 1) + "." + tasks.get(i));
+        }
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -113,13 +128,7 @@ public class Ui {
             format("Your list is currently empty.");
             return;
         }
-
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(HORIZONTAL_LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
+        showNumberedTaskList("Here are the tasks in your list:", tasks);
     }
 
     /**
@@ -132,12 +141,7 @@ public class Ui {
             format("No tasks found.");
             return;
         }
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(HORIZONTAL_LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
+        showNumberedTaskList("Here are the matching tasks in your list:", tasks);
     }
 
     /**
