@@ -7,7 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import rickshaw.task.Deadline;
 import rickshaw.task.Event;
@@ -19,9 +22,9 @@ import rickshaw.task.Todo;
  * Handles the loading and saving of tasks to a file (in data/rickshaw.txt).
  */
 public class Storage {
+    protected static final int MIN_PARTS_COUNT = 3;
     private static final String DELIMITER = " \\| ";
-    protected String filePath;
-
+    private String filePath;
     /**
      * Constructs a Storage object with the specified file path.
      *
@@ -71,7 +74,7 @@ public class Storage {
         String[] parts = line.split(DELIMITER);
 
         // Validate minimum parts
-        if (parts.length < 3) {
+        if (parts.length < MIN_PARTS_COUNT) {
             throw new RickshawException("Corrupted line (not enough fields): " + line);
         }
 
@@ -79,22 +82,26 @@ public class Storage {
         String status = parts[1]; // "1" for done, "0" for not done
         String description = parts[2];
         Task t = null;
+        String tagsField = "";
 
         switch (type) {
         case "T":
             t = new Todo(description);
+            tagsField = parts.length > 3 ? parts[3] : "";
             break;
         case "D":
             if (parts.length < 4) {
                 throw new RickshawException("Corrupted deadline (missing date): " + line);
             }
             t = new Deadline(description, parts[3]);
+            tagsField = parts.length > 4 ? parts[4] : "";
             break;
         case "E":
             if (parts.length < 5) {
                 throw new RickshawException("Corrupted event (missing times): " + line);
             }
             t = new Event(description, parts[3], parts[4]);
+            tagsField = parts.length > 5 ? parts[5] : "";
             break;
         default:
             throw new RickshawException("Unknown task type: " + type);
@@ -103,6 +110,10 @@ public class Storage {
             t.markDone();
         } else {
             t.markUndone();
+        }
+        if (!tagsField.trim().isEmpty()) {
+            Set<String> loadedTags = new HashSet<>(Arrays.asList(tagsField.split(",")));
+            t.setTags(loadedTags);
         }
         tasks.add(t);
     }
