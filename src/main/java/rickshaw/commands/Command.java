@@ -2,6 +2,7 @@ package rickshaw.commands;
 
 import java.io.IOException;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -19,7 +20,7 @@ public abstract class Command {
      * @param ui      The UI component for displaying messages / error messages.
      * @param storage The storage component.
      */
-    public abstract void run(TaskList tasks, Ui ui, Storage storage);
+    public abstract void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException;
 
     /**
      * Return response string for GUI
@@ -29,7 +30,7 @@ public abstract class Command {
      * @param storage
      */
 
-    public abstract String returnStringResponse(TaskList tasks, Storage storage);
+    public abstract String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException;
 
     /**
      * Saves the current task list to storage. (in data/rickshaw.txt)

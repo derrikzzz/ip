@@ -6,7 +6,6 @@ package rickshaw.task;
 public class Event extends Task {
     protected String from;
     protected String to;
-
     /**
      * Constructs an Event task with the specified description.
      *
@@ -36,6 +35,8 @@ public class Event extends Task {
 
     @Override
     public String toFileFormat() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+        String base = "E | " + (isDone ? "1" : "0") + " | " + description
+                + " | " + from + " | " + to;
+        return tags.isEmpty() ? base : base + " | " + String.join(",", tags);
     }
 }

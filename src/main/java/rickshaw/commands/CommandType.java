@@ -13,4 +13,6 @@ public enum CommandType {
     EVENT,
     BYE,
     FIND,
+    TAG,
+    UNTAG,
 }

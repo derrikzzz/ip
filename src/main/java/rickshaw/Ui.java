@@ -170,4 +170,12 @@ public class Ui {
     public void showUnmarkedTask(Task task) {
         format("OK, I've marked this task as not done yet:\n" + TASK_INDENT + task);
     }
+
+    public void showTaggedTask(Task task) {
+        format("Nice! I've tagged this task:\n" + TASK_INDENT + task);
+    }
+
+    public void showUntaggedTask(Task task) {
+        format("OK, I've untagged this task:\n" + TASK_INDENT + task);
+    }
 }
