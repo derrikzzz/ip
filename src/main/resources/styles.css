@@ -1,10 +1,10 @@
 .root {
-  -fx-background-color: #d1f2eb;
+  -fx-background-color: #1aab87;
 }
 
 .scroll-pane,
 .scroll-pane .viewport {
-  -fx-background-color: #009ea6;
+  -fx-background-color: #1dc097;
 }
 
 .user_dialog_box {
