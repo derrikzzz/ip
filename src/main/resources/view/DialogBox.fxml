@@ -11,6 +11,6 @@
     </padding>
     <children>
         <ImageView fx:id="picture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true" maxWidth="300.0" style="-fx-background-color: #e1f5fe; -fx-background-radius: 10; -fx-padding: 10; -fx-font-size: 13px;" />
+        <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true" maxWidth="300.0" />
     </children>
 </fx:root>
