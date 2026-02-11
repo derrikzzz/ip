@@ -36,6 +36,13 @@ public class TodoCommand extends Command {
         saveTasks(tasks, storage, ui);
     }
 
+    /**
+     * Returns a response string after adding a todo task.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string confirming the todo was added.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         Task newTodo = new Todo(description);

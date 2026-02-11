@@ -34,6 +34,13 @@ public class UnmarkCommand extends Command {
         saveTasks(tasks, storage, ui);
     }
 
+    /**
+     * Returns a response string after marking a task as not done.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string confirming the task was unmarked.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         Task unmarkedTask = tasks.unmarkTask(taskIndex);
