@@ -62,4 +62,12 @@ public class DialogBox extends HBox {
         db.dialog.getStyleClass().add("rickshaw_dialog_box");
         return db;
     }
+
+    public static DialogBox getErrorDialog(String errorMessage, Image rickshawImage) {
+        var db = new DialogBox(errorMessage, rickshawImage);
+        db.flip();
+        db.dialog.getStylesheets().add(DialogBox.class.getResource("/styles.css").toExternalForm());
+        db.dialog.getStyleClass().add("error_dialog_box");
+        return db;
+    }
 }

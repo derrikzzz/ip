@@ -20,3 +20,11 @@
   -fx-padding: 10px;
   -fx-font-size: 13px;
 }
+
+.error_dialog_box {
+  -fx-background-color: #ffcccc;
+  -fx-background-radius: 10px;
+  -fx-padding: 10px;
+  -fx-font-size: 13px;
+  -fx-text-fill: #cc0000;
+}
