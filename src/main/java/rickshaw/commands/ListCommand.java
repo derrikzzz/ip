@@ -23,6 +23,13 @@ public class ListCommand extends Command {
         ui.showList(tasks.getTasks());
     }
 
+    /**
+     * Returns a response string listing all tasks.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string with all tasks.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         ArrayList<Task> taskList = tasks.getTasks();
