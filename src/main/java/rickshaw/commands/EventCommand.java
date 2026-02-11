@@ -42,6 +42,13 @@ public class EventCommand extends Command {
         saveTasks(tasks, storage, ui);
     }
 
+    /**
+     * Returns a response string after adding an event task.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string confirming the event was added.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         Task newEvent = new Event(description, from, to);
