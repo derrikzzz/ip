@@ -22,6 +22,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Rickshaw");
+            stage.setMinWidth(400);
+            stage.setMinHeight(600);
             fxmlLoader.<MainWindow>getController().setRickshaw(rickshaw);
             stage.show();
         } catch (IOException e) {
