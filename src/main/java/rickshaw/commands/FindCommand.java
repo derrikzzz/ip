@@ -22,12 +22,26 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Finds and displays tasks matching the keyword.
+     *
+     * @param tasks   The task list.
+     * @param ui      The UI component.
+     * @param storage The storage component.
+     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> foundTasks = tasks.find(keyword);
         ui.showFindResults(foundTasks);
     }
 
+    /**
+     * Returns a response string listing tasks that match the keyword.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string with matching tasks.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         ArrayList<Task> foundTasks = tasks.find(keyword);
