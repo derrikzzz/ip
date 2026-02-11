@@ -171,10 +171,20 @@ public class Ui {
         format("OK, I've marked this task as not done yet:\n" + TASK_INDENT + task);
     }
 
+    /**
+     * Shows tagged task message.
+     *
+     * @param task The task that was tagged.
+     */
     public void showTaggedTask(Task task) {
         format("Nice! I've tagged this task:\n" + TASK_INDENT + task);
     }
 
+    /**
+     * Shows untagged task message.
+     *
+     * @param task The task that was untagged.
+     */
     public void showUntaggedTask(Task task) {
         format("OK, I've untagged this task:\n" + TASK_INDENT + task);
     }
