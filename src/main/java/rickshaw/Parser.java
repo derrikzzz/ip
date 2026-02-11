@@ -62,6 +62,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the mark command argument.
+     *
+     * @param argument The task number string.
+     * @return A MarkCommand for the specified task.
+     * @throws RickshawException If the argument is empty.
+     */
     private Command parseMark(String argument) throws RickshawException {
         if (argument.isEmpty()) {
             throw new RickshawException(
@@ -70,6 +77,13 @@ public class Parser {
         return new MarkCommand(Integer.parseInt(argument));
     }
 
+    /**
+     * Parses the unmark command argument.
+     *
+     * @param argument The task number string.
+     * @return An UnmarkCommand for the specified task.
+     * @throws RickshawException If the argument is empty.
+     */
     private Command parseUnmark(String argument) throws RickshawException {
         if (argument.isEmpty()) {
             throw new RickshawException(
@@ -78,6 +92,13 @@ public class Parser {
         return new UnmarkCommand(Integer.parseInt(argument));
     }
 
+    /**
+     * Parses the delete command argument.
+     *
+     * @param argument The task number string.
+     * @return A DeleteCommand for the specified task.
+     * @throws RickshawException If the argument is empty.
+     */
     private Command parseDelete(String argument) throws RickshawException {
         if (argument.isEmpty()) {
             throw new RickshawException(
@@ -86,6 +107,13 @@ public class Parser {
         return new DeleteCommand(Integer.parseInt(argument));
     }
 
+    /**
+     * Parses the find command argument.
+     *
+     * @param argument The keyword to search for.
+     * @return A FindCommand with the specified keyword.
+     * @throws RickshawException If the argument is empty.
+     */
     private Command parseFind(String argument) throws RickshawException {
         if (argument.isEmpty()) {
             throw new RickshawException(
@@ -94,6 +122,13 @@ public class Parser {
         return new FindCommand(argument);
     }
 
+    /**
+     * Parses the tag command argument.
+     *
+     * @param argument The task number and tag string.
+     * @return A TagCommand for the specified task and tag.
+     * @throws RickshawException If the argument format is invalid.
+     */
     private Command parseTag(String argument) throws RickshawException {
         String[] parts = argument.split(" ", 2);
         if (parts.length < MIN_SEGMENT_COUNT || parts[1].trim().isEmpty()) {
@@ -110,6 +145,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the untag command argument.
+     *
+     * @param argument The task number and tag string.
+     * @return An UntagCommand for the specified task and tag.
+     * @throws RickshawException If the argument format is invalid.
+     */
     private Command parseUntag(String argument) throws RickshawException {
         String[] parts = argument.split(" ", 2);
         if (parts.length < MIN_SEGMENT_COUNT || parts[1].trim().isEmpty()) {
