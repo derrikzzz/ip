@@ -34,6 +34,13 @@ public class MarkCommand extends Command {
         saveTasks(tasks, storage, ui);
     }
 
+    /**
+     * Returns a response string after marking a task as done.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string confirming the task was marked.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         Task markedTask = tasks.markTask(taskIndex);
