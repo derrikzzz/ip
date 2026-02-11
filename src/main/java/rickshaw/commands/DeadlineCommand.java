@@ -61,6 +61,13 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Returns a response string after adding a deadline task.
+     *
+     * @param tasks   The task list.
+     * @param storage The storage component.
+     * @return The response string confirming the deadline was added, or an error message.
+     */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
         try {
