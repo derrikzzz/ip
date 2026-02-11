@@ -23,13 +23,13 @@ public abstract class Command {
     public abstract void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException;
 
     /**
-     * Return response string for GUI
-     * Conrete impelementation delegated to subclasses.
+     * Returns a response string for the GUI.
+     * Concrete implementation delegated to subclasses.
      *
-     * @param tasks
-     * @param storage
+     * @param tasks   The task list to execute the command on.
+     * @param storage The storage component.
+     * @return The response string to display in the GUI.
      */
-
     public abstract String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException;
 
     /**
