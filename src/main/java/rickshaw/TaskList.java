@@ -3,6 +3,7 @@ package rickshaw;
 import java.util.ArrayList;
 
 import rickshaw.task.Task;
+import rickshaw.RickshawException;
 
 /**
  * Represents the task list.
@@ -43,6 +44,19 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    /**
+     * Validates that the given 1-based task index is within range.
+     *
+     * @param index The 1-based index to validate.
+     * @throws RickshawException If the index is out of range.
+     */
+    public void validateIndex(int index) throws RickshawException {
+        if (index < 1 || index > tasks.size()) {
+            throw new RickshawException("Task index " + index + " is out of range. "
+                    + "You have " + tasks.size() + " task(s).");
+        }
     }
 
     /**
