@@ -29,6 +29,9 @@ public class Parser {
      * @throws RickshawException If the input is invalid.
      */
     public Command parse(String input) throws RickshawException {
+        if (input == null || input.trim().isEmpty()) {
+            throw new RickshawException("Please enter a command.");
+        }
         String trimmedCommand = input.trim();
         String[] parts = trimmedCommand.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
@@ -216,8 +219,18 @@ public class Parser {
                     "I recognise that you want to add a deadline task, but the format is incorrect. "
                     + "Usage: deadline <description> /by <time>");
         }
-        String description = segments[0];
-        String doneBy = segments[1];
+        String description = segments[0].trim();
+        String doneBy = segments[1].trim();
+        if (description.isEmpty()) {
+            throw new RickshawException(
+                    "The description of a deadline task cannot be empty. "
+                    + "Usage: deadline <description> /by <time>");
+        }
+        if (doneBy.isEmpty()) {
+            throw new RickshawException(
+                    "The deadline date/time cannot be empty. "
+                    + "Usage: deadline <description> /by <time>");
+        }
         return new DeadlineCommand(description, doneBy);
     }
 
@@ -237,7 +250,7 @@ public class Parser {
                     + "Usage: event <description> /from <start> /to <end>");
         }
 
-        String description = fromSplit[0];
+        String description = fromSplit[0].trim();
         String timeInfo = fromSplit[1];
 
         String[] timeSplit = timeInfo.split(" /to ");
@@ -246,8 +259,28 @@ public class Parser {
                     "I recognise that you want to add an event task, but the format is incorrect. "
                     + "Usage: event <description> /from <start> /to <end>");
         }
-        String from = timeSplit[0];
-        String to = timeSplit[1];
+        String from = timeSplit[0].trim();
+        String to = timeSplit[1].trim();
+
+        if (description.isEmpty()) {
+            throw new RickshawException(
+                    "The description of an event task cannot be empty. "
+                    + "Usage: event <description> /from <start> /to <end>");
+        }
+        if (from.isEmpty()) {
+            throw new RickshawException(
+                    "The start time of an event cannot be empty. "
+                    + "Usage: event <description> /from <start> /to <end>");
+        }
+        if (to.isEmpty()) {
+            throw new RickshawException(
+                    "The end time of an event cannot be empty. "
+                    + "Usage: event <description> /from <start> /to <end>");
+        }
+        if (from.equals(to)) {
+            throw new RickshawException(
+                    "The start time and end time of an event cannot be the same.");
+        }
 
         return new EventCommand(description, from, to);
     }
