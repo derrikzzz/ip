@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -28,7 +29,8 @@ public class MarkCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task markedTask = tasks.markTask(taskIndex);
         ui.showMarkedTask(markedTask);
         saveTasks(tasks, storage, ui);
@@ -42,7 +44,8 @@ public class MarkCommand extends Command {
      * @return The response string confirming the task was marked.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task markedTask = tasks.markTask(taskIndex);
         saveTasks(tasks, storage);
         return "Nice! I've marked this task as done:\n  " + markedTask;
