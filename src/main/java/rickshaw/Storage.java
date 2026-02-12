@@ -154,6 +154,8 @@ public class Storage {
             for (Task task : tasks) {
                 writer.write(task.toFileFormat() + System.lineSeparator());
             }
+        } catch (IOException e) {
+            throw new IOException("Error saving file: " + e.getMessage(), e);
         }
     }
 }
