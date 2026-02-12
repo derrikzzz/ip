@@ -21,6 +21,21 @@ public class Parser {
     private static final int EVENT_COMMAND_LENGTH = "event".length();
     private static final int DEADLINE_COMMAND_LENGTH = "deadline".length();
     private static final int MIN_SEGMENT_COUNT = 2;
+    private static final int MAX_DELIMITER_COUNT = 1;
+
+    /**
+     * Validates that a description does not contain the pipe character.
+     *
+     * @param description The description to validate.
+     * @throws RickshawException If the description contains a pipe character.
+     */
+    private void validateDescription(String description) throws RickshawException {
+        if (description.contains("|")) {
+            throw new RickshawException(
+                    "Description cannot contain the '|' character as it is reserved.");
+        }
+    }
+
     /**
      * Parses the input string from user and returns appropriate Command object.
      *
@@ -77,6 +92,10 @@ public class Parser {
             throw new RickshawException(
                     "Please provide a task number to mark. Usage: mark <task number>");
         }
+        if (argument.contains(" ")) {
+            throw new RickshawException(
+                    "Too many arguments. Usage: mark <task number>");
+        }
         try {
             return new MarkCommand(Integer.parseInt(argument));
         } catch (NumberFormatException e) {
@@ -97,6 +116,10 @@ public class Parser {
             throw new RickshawException(
                     "Please provide a task number to unmark. Usage: unmark <task number>");
         }
+        if (argument.contains(" ")) {
+            throw new RickshawException(
+                    "Too many arguments. Usage: unmark <task number>");
+        }
         try {
             return new UnmarkCommand(Integer.parseInt(argument));
         } catch (NumberFormatException e) {
@@ -116,6 +139,10 @@ public class Parser {
         if (argument.isEmpty()) {
             throw new RickshawException(
                     "Please provide a task number to delete. Usage: delete <task number>");
+        }
+        if (argument.contains(" ")) {
+            throw new RickshawException(
+                    "Too many arguments. Usage: delete <task number>");
         }
         try {
             return new DeleteCommand(Integer.parseInt(argument));
@@ -200,6 +227,7 @@ public class Parser {
                     "Are you sure you want to add a todo task, "
                     + "the description of a todo task cannot be empty");
         }
+        validateDescription(description);
         return new TodoCommand(description);
     }
 
@@ -219,6 +247,11 @@ public class Parser {
                     "I recognise that you want to add a deadline task, but the format is incorrect. "
                     + "Usage: deadline <description> /by <time>");
         }
+        if (segments.length > MIN_SEGMENT_COUNT) {
+            throw new RickshawException(
+                    "Multiple '/by' delimiters found. "
+                    + "Usage: deadline <description> /by <time>");
+        }
         String description = segments[0].trim();
         String doneBy = segments[1].trim();
         if (description.isEmpty()) {
@@ -231,6 +264,7 @@ public class Parser {
                     "The deadline date/time cannot be empty. "
                     + "Usage: deadline <description> /by <time>");
         }
+        validateDescription(description);
         return new DeadlineCommand(description, doneBy);
     }
 
@@ -249,6 +283,11 @@ public class Parser {
                     "I recognise that you want to add an event task, but the format is incorrect. "
                     + "Usage: event <description> /from <start> /to <end>");
         }
+        if (fromSplit.length > MIN_SEGMENT_COUNT) {
+            throw new RickshawException(
+                    "Multiple '/from' delimiters found. "
+                    + "Usage: event <description> /from <start> /to <end>");
+        }
 
         String description = fromSplit[0].trim();
         String timeInfo = fromSplit[1];
@@ -257,6 +296,11 @@ public class Parser {
         if (timeSplit.length < MIN_SEGMENT_COUNT) {
             throw new RickshawException(
                     "I recognise that you want to add an event task, but the format is incorrect. "
+                    + "Usage: event <description> /from <start> /to <end>");
+        }
+        if (timeSplit.length > MIN_SEGMENT_COUNT) {
+            throw new RickshawException(
+                    "Multiple '/to' delimiters found. "
                     + "Usage: event <description> /from <start> /to <end>");
         }
         String from = timeSplit[0].trim();
@@ -281,6 +325,7 @@ public class Parser {
             throw new RickshawException(
                     "The start time and end time of an event cannot be the same.");
         }
+        validateDescription(description);
 
         return new EventCommand(description, from, to);
     }
