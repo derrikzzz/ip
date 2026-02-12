@@ -35,9 +35,17 @@ public class MainWindow extends AnchorPane {
         try {
             userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
             rickshawImage = new Image(this.getClass().getResourceAsStream("/images/rickshaw.png"));
+            showWelcomeMessage();
         } catch (Exception e) {
             System.err.println("Warning: Could not load images from /images/ directory");
         }
+    }
+
+    private void showWelcomeMessage() {
+        String welcome = "I'm Rickshaw. Give me your tasks and I'll help you manage them!";
+        dialogContainer.getChildren().addAll(
+            DialogBox.getRickshawDialog(welcome, rickshawImage)
+        );
     }
 
     public void setRickshaw(Rickshaw r) {
