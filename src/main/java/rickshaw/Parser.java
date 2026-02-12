@@ -74,7 +74,12 @@ public class Parser {
             throw new RickshawException(
                     "Please provide a task number to mark. Usage: mark <task number>");
         }
-        return new MarkCommand(Integer.parseInt(argument));
+        try {
+            return new MarkCommand(Integer.parseInt(argument));
+        } catch (NumberFormatException e) {
+            throw new RickshawException(
+                    "'" + argument + "' is not a valid task number. Usage: mark <task number>");
+        }
     }
 
     /**
@@ -89,7 +94,12 @@ public class Parser {
             throw new RickshawException(
                     "Please provide a task number to unmark. Usage: unmark <task number>");
         }
-        return new UnmarkCommand(Integer.parseInt(argument));
+        try {
+            return new UnmarkCommand(Integer.parseInt(argument));
+        } catch (NumberFormatException e) {
+            throw new RickshawException(
+                    "'" + argument + "' is not a valid task number. Usage: unmark <task number>");
+        }
     }
 
     /**
@@ -104,7 +114,12 @@ public class Parser {
             throw new RickshawException(
                     "Please provide a task number to delete. Usage: delete <task number>");
         }
-        return new DeleteCommand(Integer.parseInt(argument));
+        try {
+            return new DeleteCommand(Integer.parseInt(argument));
+        } catch (NumberFormatException e) {
+            throw new RickshawException(
+                    "'" + argument + "' is not a valid task number. Usage: delete <task number>");
+        }
     }
 
     /**
