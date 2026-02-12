@@ -65,13 +65,9 @@ public class Rickshaw {
      * @param input The user's input string.
      * @return The response string from Rickshaw.
      */
-    public String getResponse(String input) {
-        try {
-            Command parsedCommand = parser.parse(input);
-            return parsedCommand.returnStringResponse(tasks, storage);
-        } catch (RickshawException e) {
-            return e.getMessage();
-        }
+    public String getResponse(String input) throws RickshawException {
+        Command parsedCommand = parser.parse(input);
+        return parsedCommand.returnStringResponse(tasks, storage);
     }
 
     /**

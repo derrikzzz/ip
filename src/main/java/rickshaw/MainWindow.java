@@ -50,11 +50,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = rickshaw.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getRickshawDialog(response, rickshawImage)
-        );
+        try {
+            String response = rickshaw.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getRickshawDialog(response, rickshawImage)
+            );
+        } catch (RickshawException e) {
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getErrorDialog(e.getMessage(), rickshawImage)
+            );
+        }
         userInput.clear();
     }
 }

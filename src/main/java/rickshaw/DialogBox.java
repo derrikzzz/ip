@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Represents a dialog box for user or Rickshaw.
@@ -34,6 +35,12 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         picture.setImage(img);
+
+        Rectangle clip = new Rectangle(50, 50);
+        clip.setArcWidth(15);
+        clip.setArcHeight(15);
+        picture.setClip(clip);
+        picture.setPreserveRatio(false);
     }
 
     /**
@@ -60,6 +67,14 @@ public class DialogBox extends HBox {
         db.flip();
         db.dialog.getStylesheets().add(DialogBox.class.getResource("/styles.css").toExternalForm());
         db.dialog.getStyleClass().add("rickshaw_dialog_box");
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String errorMessage, Image rickshawImage) {
+        var db = new DialogBox(errorMessage, rickshawImage);
+        db.flip();
+        db.dialog.getStylesheets().add(DialogBox.class.getResource("/styles.css").toExternalForm());
+        db.dialog.getStyleClass().add("error_dialog_box");
         return db;
     }
 }

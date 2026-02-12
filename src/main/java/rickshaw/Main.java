@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setMinWidth(400);
             stage.setMinHeight(600);
             fxmlLoader.<MainWindow>getController().setRickshaw(rickshaw);
+            scene.getStylesheets().add(Main.class.getResource("/styles.css").toExternalForm());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
