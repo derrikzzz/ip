@@ -37,10 +37,14 @@ public class EventCommand extends Command {
      */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
-        Task newEvent = new Event(description, from, to);
-        tasks.addTask(newEvent);
-        ui.showTaskAdded(newEvent, tasks.size());
-        saveTasks(tasks, storage, ui);
+        try {
+            Task newEvent = new Event(description, from, to);
+            tasks.addTask(newEvent);
+            ui.showTaskAdded(newEvent, tasks.size());
+            saveTasks(tasks, storage, ui);
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
     }
 
     /**
@@ -52,10 +56,14 @@ public class EventCommand extends Command {
      */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
-        Task newEvent = new Event(description, from, to);
-        tasks.addTask(newEvent);
-        saveTasks(tasks, storage);
-        return "Got it. I've added this task:\n  " + newEvent
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        try {
+            Task newEvent = new Event(description, from, to);
+            tasks.addTask(newEvent);
+            saveTasks(tasks, storage);
+            return "Got it. I've added this task:\n  " + newEvent
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
     }
 }
