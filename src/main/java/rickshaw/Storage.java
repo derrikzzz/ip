@@ -36,10 +36,11 @@ public class Storage {
 
     /**
      * Loads the tasks from the file (in data/rickshaw.txt).
+     * Corrupted lines are skipped with warnings instead of failing the entire load.
      *
      * @return The list of tasks.
      * @throws IOException If the file cannot be read.
-     * @throws RickshawException If the file exists but cannot be read or parsed.
+     * @throws RickshawException If the file exists but cannot be read, or all lines are corrupted.
      */
     public ArrayList<Task> load() throws IOException, RickshawException {
         File f = new File(filePath);
@@ -53,15 +54,26 @@ public class Storage {
         }
 
         int lineNumber = 0;
+        ArrayList<String> warnings = new ArrayList<>();
         try (Scanner s = new Scanner(f)) {
             while (s.hasNext()) {
                 lineNumber++;
                 String line = s.nextLine();
-                process(line, tasks, lineNumber);
+                try {
+                    process(line, tasks, lineNumber);
+                } catch (RickshawException e) {
+                    warnings.add("Line " + lineNumber + ": " + e.getMessage());
+                }
             }
         } catch (IOException e) {
             throw new RickshawException("Error loading file: " + e.getMessage());
         }
+
+        if (!warnings.isEmpty() && tasks.isEmpty()) {
+            throw new RickshawException("All lines in the data file are corrupted. "
+                    + "Warnings:\n" + String.join("\n", warnings));
+        }
+
         return tasks;
     }
 
@@ -120,7 +132,12 @@ public class Storage {
                 throw new RickshawException("Corrupted line %d (event missing times): %s",
                         lineNumber, line);
             }
-            t = new Event(description, parts[3], parts[4]);
+            try {
+                t = new Event(description, parts[3], parts[4]);
+            } catch (IllegalArgumentException e) {
+                throw new RickshawException("Corrupted line %d (invalid event dates): %s",
+                        lineNumber, line);
+            }
             tagsField = parts.length > 5 ? parts[5] : "";
             break;
         default:
@@ -131,7 +148,19 @@ public class Storage {
             t.markDone();
         }
         if (!tagsField.trim().isEmpty()) {
-            Set<String> loadedTags = new HashSet<>(Arrays.asList(tagsField.split(",")));
+            String[] tagArray = tagsField.split(",");
+            Set<String> loadedTags = new HashSet<>();
+            for (String tag : tagArray) {
+                String trimmedTag = tag.trim();
+                if (trimmedTag.contains("|")) {
+                    throw new RickshawException(
+                            "Corrupted line %d (tag contains reserved '|' character): %s",
+                            lineNumber, line);
+                }
+                if (!trimmedTag.isEmpty()) {
+                    loadedTags.add(trimmedTag);
+                }
+            }
             t.setTags(loadedTags);
         }
         tasks.add(t);
@@ -148,6 +177,12 @@ public class Storage {
         Path directoryPath = path.getParent();
         if (directoryPath != null) {
             Files.createDirectories(directoryPath);
+        }
+
+        File f = new File(filePath);
+        if (f.exists() && !f.canWrite()) {
+            throw new IOException("Cannot write to file: " + filePath
+                    + ". Please check file permissions.");
         }
 
         try (FileWriter writer = new FileWriter(filePath)) {
