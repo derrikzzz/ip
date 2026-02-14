@@ -1,5 +1,7 @@
 package rickshaw.task;
 
+import java.util.Objects;
+
 /**
  * Represents a todo task.
  */
@@ -22,5 +24,24 @@ public class Todo extends Task {
     public String toFileFormat() {
         String base = "T | " + (isDone ? "1" : "0") + " | " + description;
         return tags.isEmpty() ? base : base + " | " + String.join(",", tags);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Todo)) {
+            return false;
+        }
+
+        Todo otherTodo = (Todo) object;
+        return super.equals(otherTodo) && this.description.equals(otherTodo.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, tags);
     }
 }

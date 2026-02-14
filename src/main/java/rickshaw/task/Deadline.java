@@ -3,6 +3,7 @@ package rickshaw.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * Represents a deadline task with a due date.
@@ -40,5 +41,27 @@ public class Deadline extends Task {
         String base = String.format("D | %s | %s | %s", (isDone ? "1" : "0"),
                 description, by.format(INPUT_FORMATTER));
         return tags.isEmpty() ? base : base + " | " + String.join(",", tags);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline otherDeadline = (Deadline) object;
+        return this.description.equals(otherDeadline.description)
+                && this.by.equals(otherDeadline.by)
+                && this.isDone == otherDeadline.isDone
+                && this.tags.equals(otherDeadline.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, by, isDone, tags);
     }
 }
