@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -35,7 +36,7 @@ public class EventCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
         Task newEvent = new Event(description, from, to);
         tasks.addTask(newEvent);
         ui.showTaskAdded(newEvent, tasks.size());
@@ -50,7 +51,7 @@ public class EventCommand extends Command {
      * @return The response string confirming the event was added.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
         Task newEvent = new Event(description, from, to);
         tasks.addTask(newEvent);
         saveTasks(tasks, storage);

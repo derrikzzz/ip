@@ -20,7 +20,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void addTodo_validTodoInput_success() {
+    public void addTodo_validTodoInput_success() throws RickshawException {
         TodoCommand todo = new TodoCommand("go to the library");
         todo.run(taskList, ui, storage);
         assertEquals(1, taskList.size());
