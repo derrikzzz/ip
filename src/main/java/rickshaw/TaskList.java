@@ -36,7 +36,7 @@ public class TaskList {
     public void addTask(Task newTask) throws RickshawException {
         for (Task task : tasks) {
             if (task.equals(newTask)) {
-                throw new RickshawException("This task already exists in the list: " + newTask);
+                throw new RickshawException("This task already exists in the list: " + newTask.getDescription());
             }
         }
         this.tasks.add(newTask);

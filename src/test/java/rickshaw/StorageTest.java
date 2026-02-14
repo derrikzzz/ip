@@ -13,14 +13,14 @@ public class StorageTest {
 
     @Test
     public void loadEmptyFile_returnsEmptyList_success() throws IOException, RickshawException {
-        Storage storage = new Storage("data/test_empty.txt");
+        Storage storage = new Storage("src/test/resources/data/test_empty.txt");
         ArrayList<Task> tasks = storage.load();
         assertEquals(0, tasks.size());
     }
 
     @Test
     public void loadValidFile_returnsTasks_success() throws IOException, RickshawException {
-        Storage storage = new Storage("data/test_valid.txt");
+        Storage storage = new Storage("src/test/resources/data/test_valid.txt");
         ArrayList<Task> tasks = storage.load();
         assertEquals(2, tasks.size());
         assertEquals("read book", tasks.get(0).getDescription());

@@ -37,7 +37,7 @@ public class Todo extends Task {
         }
 
         Todo otherTodo = (Todo) object;
-        return super.equals(otherTodo) && this.description.equals(otherTodo.description);
+        return this.description.equals(otherTodo.description);
     }
 
     @Override
