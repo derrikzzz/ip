@@ -1,6 +1,7 @@
 package rickshaw;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,4 +28,14 @@ public class TaskListTest {
         assertEquals("go to the library", taskList.getTask(0).getDescription());
         assertEquals(false, taskList.getTask(0).isDone());
     }
+
+    @Test
+     public void addTodo_duplicateTodoInput_throwsException() throws RickshawException {
+      TodoCommand todo = new TodoCommand("go gym");
+      todo.run(taskList, ui, storage);
+      RickshawException e = assertThrows(RickshawException.class, () -> {
+          todo.run(taskList, ui, storage);
+      });
+      assertEquals("This task already exists in the list: go gym", e.getMessage());
+  }
 }
