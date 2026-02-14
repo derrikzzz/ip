@@ -58,9 +58,14 @@ public class TaskList {
      * @throws RickshawException If the index is out of range.
      */
     public void validateIndex(int index) throws RickshawException {
+        if (tasks.isEmpty()) {
+            throw new RickshawException(
+                    "Your task list is empty. Add some tasks first before using this command.");
+        }
         if (index < 1 || index > tasks.size()) {
             throw new RickshawException("Task index " + index + " is out of range. "
-                    + "You have " + tasks.size() + " task(s).");
+                    + "You have " + tasks.size() + " task(s). Please use an index between 1 and "
+                    + tasks.size() + ".");
         }
     }
 
