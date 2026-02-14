@@ -30,12 +30,12 @@ public class TaskListTest {
     }
 
     @Test
-     public void addTodo_duplicateTodoInput_throwsException() throws RickshawException {
-      TodoCommand todo = new TodoCommand("go gym");
-      todo.run(taskList, ui, storage);
-      RickshawException e = assertThrows(RickshawException.class, () -> {
-          todo.run(taskList, ui, storage);
-      });
-      assertEquals("This task already exists in the list: go gym", e.getMessage());
-  }
+    public void addTodo_duplicateTodoInput_throwsException() throws RickshawException {
+        TodoCommand todo = new TodoCommand("go gym");
+        todo.run(taskList, ui, storage);
+        RickshawException e = assertThrows(RickshawException.class, () -> {
+            todo.run(taskList, ui, storage);
+        });
+        assertEquals("This task already exists in the list: go gym", e.getMessage());
+    }
 }
