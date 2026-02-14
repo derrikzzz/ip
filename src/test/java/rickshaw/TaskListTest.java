@@ -17,7 +17,7 @@ public class TaskListTest {
     public void setUp() {
         taskList = new TaskList();
         ui = new Ui("TestBot");
-        storage = new Storage("data/test.txt");
+        storage = new Storage("src/test/resources/data/test.txt");
     }
 
     @Test
