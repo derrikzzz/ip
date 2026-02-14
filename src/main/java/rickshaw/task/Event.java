@@ -1,5 +1,7 @@
 package rickshaw.task;
 
+import java.util.Objects;
+
 /**
  * Represents an event task with a start and end time.
  */
@@ -38,5 +40,28 @@ public class Event extends Task {
         String base = "E | " + (isDone ? "1" : "0") + " | " + description
                 + " | " + from + " | " + to;
         return tags.isEmpty() ? base : base + " | " + String.join(",", tags);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) object;
+        return this.description.equals(otherEvent.getDescription())
+                && this.from.equals(otherEvent.from)
+                && this.to.equals(otherEvent.to)
+                && this.isDone == otherEvent.isDone
+                && this.tags.equals(otherEvent.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, from, to, isDone, tags);
     }
 }
