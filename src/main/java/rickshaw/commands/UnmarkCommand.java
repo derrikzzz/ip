@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -28,7 +29,8 @@ public class UnmarkCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task unmarkedTask = tasks.unmarkTask(taskIndex);
         ui.showUnmarkedTask(unmarkedTask);
         saveTasks(tasks, storage, ui);
@@ -42,7 +44,8 @@ public class UnmarkCommand extends Command {
      * @return The response string confirming the task was unmarked.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task unmarkedTask = tasks.unmarkTask(taskIndex);
         saveTasks(tasks, storage);
         return "OK, I've marked this task as not done yet:\n  " + unmarkedTask;

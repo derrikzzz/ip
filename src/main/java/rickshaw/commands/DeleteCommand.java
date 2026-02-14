@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -28,7 +29,8 @@ public class DeleteCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task deletedTask = tasks.deleteTask(taskIndex);
         ui.showTaskDeleted(deletedTask, tasks.size());
         saveTasks(tasks, storage, ui);
@@ -42,7 +44,8 @@ public class DeleteCommand extends Command {
      * @return The response string confirming deletion.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
+        tasks.validateIndex(taskIndex);
         Task deletedTask = tasks.deleteTask(taskIndex);
         saveTasks(tasks, storage);
         return "Noted. I've removed this task:\n  " + deletedTask

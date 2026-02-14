@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -50,14 +51,14 @@ public class DeadlineCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
         try {
             Task newDeadline = new Deadline(description, by);
             tasks.addTask(newDeadline);
             ui.showTaskAdded(newDeadline, tasks.size());
             saveTasks(tasks, storage, ui);
         } catch (IllegalArgumentException e) {
-            ui.showErrorMessage(e.getMessage());
+            throw new RickshawException(e.getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ public class DeadlineCommand extends Command {
      * @return The response string confirming the deadline was added, or an error message.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
         try {
             Task newDeadline = new Deadline(description, by);
             tasks.addTask(newDeadline);
@@ -77,7 +78,7 @@ public class DeadlineCommand extends Command {
             return "Got it. I've added this task:\n  " + newDeadline
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (IllegalArgumentException e) {
-            return "Error: " + e.getMessage();
+            throw new RickshawException(e.getMessage());
         }
     }
 }

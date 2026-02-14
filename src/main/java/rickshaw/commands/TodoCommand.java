@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -29,7 +30,7 @@ public class TodoCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
         Task newTodo = new Todo(description);
         tasks.addTask(newTodo);
         ui.showTaskAdded(newTodo, tasks.size());
@@ -44,7 +45,7 @@ public class TodoCommand extends Command {
      * @return The response string confirming the todo was added.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
         Task newTodo = new Todo(description);
         tasks.addTask(newTodo);
         saveTasks(tasks, storage);

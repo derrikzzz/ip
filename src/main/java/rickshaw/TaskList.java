@@ -31,8 +31,14 @@ public class TaskList {
      * Adds a task to the task list.
      *
      * @param newTask The task to add.
+     * @throws RickshawException If a duplicate task already exists in the list.
      */
-    public void addTask(Task newTask) {
+    public void addTask(Task newTask) throws RickshawException {
+        for (Task task : tasks) {
+            if (task.equals(newTask)) {
+                throw new RickshawException("This task already exists in the list: " + newTask);
+            }
+        }
         this.tasks.add(newTask);
     }
 
@@ -43,6 +49,24 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    /**
+     * Validates that the given 1-based task index is within range.
+     *
+     * @param index The 1-based index to validate.
+     * @throws RickshawException If the index is out of range.
+     */
+    public void validateIndex(int index) throws RickshawException {
+        if (tasks.isEmpty()) {
+            throw new RickshawException(
+                    "Your task list is empty. Add some tasks first before using this command.");
+        }
+        if (index < 1 || index > tasks.size()) {
+            throw new RickshawException("Task index " + index + " is out of range. "
+                    + "You have " + tasks.size() + " task(s). Please use an index between 1 and "
+                    + tasks.size() + ".");
+        }
     }
 
     /**
@@ -61,9 +85,13 @@ public class TaskList {
      *
      * @param index The index of the task.
      * @return The task.
+     * @throws RickshawException If the task is already marked as done.
      */
-    public Task markTask(int index) {
+    public Task markTask(int index) throws RickshawException {
         Task task = this.getTask(index - 1);
+        if (task.isDone()) {
+            throw new RickshawException("This task is already marked as done: " + task);
+        }
         task.markDone();
         return task;
     }
@@ -73,9 +101,13 @@ public class TaskList {
      *
      * @param index The index of the task.
      * @return The task.
+     * @throws RickshawException If the task is already marked as not done.
      */
-    public Task unmarkTask(int index) {
+    public Task unmarkTask(int index) throws RickshawException {
         Task task = this.getTask(index - 1);
+        if (!task.isDone()) {
+            throw new RickshawException("This task is already marked as not done: " + task);
+        }
         task.markUndone();
         return task;
     }

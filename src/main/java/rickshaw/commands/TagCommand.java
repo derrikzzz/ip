@@ -33,7 +33,11 @@ public class TagCommand extends Command {
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
         validateIndex(tasks);
-        tasks.getTask(taskIndex - 1).addTag(tag);
+        try {
+            tasks.getTask(taskIndex - 1).addTag(tag);
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
         ui.showTaggedTask(tasks.getTask(taskIndex - 1));
         saveTasks(tasks, storage, ui);
     }
@@ -41,7 +45,11 @@ public class TagCommand extends Command {
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
         validateIndex(tasks);
-        tasks.getTask(taskIndex - 1).addTag(tag);
+        try {
+            tasks.getTask(taskIndex - 1).addTag(tag);
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
         saveTasks(tasks, storage);
         return "Added tag " + tag + " to task " + taskIndex;
     }

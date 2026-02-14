@@ -1,5 +1,6 @@
 package rickshaw.commands;
 
+import rickshaw.RickshawException;
 import rickshaw.Storage;
 import rickshaw.TaskList;
 import rickshaw.Ui;
@@ -35,11 +36,15 @@ public class EventCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void run(TaskList tasks, Ui ui, Storage storage) {
-        Task newEvent = new Event(description, from, to);
-        tasks.addTask(newEvent);
-        ui.showTaskAdded(newEvent, tasks.size());
-        saveTasks(tasks, storage, ui);
+    public void run(TaskList tasks, Ui ui, Storage storage) throws RickshawException {
+        try {
+            Task newEvent = new Event(description, from, to);
+            tasks.addTask(newEvent);
+            ui.showTaskAdded(newEvent, tasks.size());
+            saveTasks(tasks, storage, ui);
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
     }
 
     /**
@@ -50,11 +55,15 @@ public class EventCommand extends Command {
      * @return The response string confirming the event was added.
      */
     @Override
-    public String returnStringResponse(TaskList tasks, Storage storage) {
-        Task newEvent = new Event(description, from, to);
-        tasks.addTask(newEvent);
-        saveTasks(tasks, storage);
-        return "Got it. I've added this task:\n  " + newEvent
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    public String returnStringResponse(TaskList tasks, Storage storage) throws RickshawException {
+        try {
+            Task newEvent = new Event(description, from, to);
+            tasks.addTask(newEvent);
+            saveTasks(tasks, storage);
+            return "Got it. I've added this task:\n  " + newEvent
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+        } catch (IllegalArgumentException e) {
+            throw new RickshawException(e.getMessage());
+        }
     }
 }
