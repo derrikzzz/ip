@@ -110,7 +110,13 @@ public class Parser {
      */
     private LocalDateTime parseDateTime(String dateStr, String fieldName) throws RickshawException {
         try {
-            return LocalDateTime.parse(dateStr, STRICT_DATE_FORMATTER);
+            LocalDateTime dateTime = LocalDateTime.parse(dateStr, STRICT_DATE_FORMATTER);
+            if (dateTime.isBefore(LocalDateTime.now())) {
+                throw new RickshawException(
+                        "The %s cannot be in the past: '%s'.",
+                        fieldName, dateStr);
+            }
+            return dateTime;
         } catch (DateTimeParseException e) {
             throw new RickshawException(
                     "Invalid %s: '%s'. Please use the format: d/MM/yyyy HHmm",

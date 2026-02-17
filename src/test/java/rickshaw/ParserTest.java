@@ -13,14 +13,14 @@ public class ParserTest {
     @Test
     public void parseDeadline_validInput_success() throws RickshawException {
         Parser parser = new Parser();
-        String input = "deadline return book /by 1/12/2024 1800";
+        String input = "deadline return book /by 1/12/2099 1800";
 
         Command result = parser.parseDeadline(input);
 
         if (result instanceof DeadlineCommand) {
             DeadlineCommand deadline = (DeadlineCommand) result;
             assertEquals("return book", deadline.getDescription());
-            assertEquals("1/12/2024 1800", deadline.getBy());
+            assertEquals("1/12/2099 1800", deadline.getBy());
         }
     }
 
