@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import rickshaw.commands.HelpCommand;
 
 /**
  * Controller for the main GUI window.
@@ -42,7 +43,8 @@ public class MainWindow extends AnchorPane {
     }
 
     private void showWelcomeMessage() {
-        String welcome = "I'm Rickshaw. Give me your tasks and I'll help you manage them!";
+        String welcome = "I'm Rickshaw. Give me your tasks and I'll help you manage them!\n\n"
+                + HelpCommand.getHelpMessage();
         dialogContainer.getChildren().addAll(
             DialogBox.getRickshawDialog(welcome, rickshawImage)
         );

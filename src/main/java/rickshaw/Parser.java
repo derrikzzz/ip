@@ -10,6 +10,7 @@ import rickshaw.commands.DeadlineCommand;
 import rickshaw.commands.DeleteCommand;
 import rickshaw.commands.EventCommand;
 import rickshaw.commands.FindCommand;
+import rickshaw.commands.HelpCommand;
 import rickshaw.commands.ListCommand;
 import rickshaw.commands.MarkCommand;
 import rickshaw.commands.TagCommand;
@@ -60,6 +61,8 @@ public class Parser {
             return new ByeCommand();
         case "LIST":
             return new ListCommand();
+        case "HELP":
+            return new HelpCommand();
         case "FIND":
             return parseFind(argument);
         case "TAG":

@@ -3,6 +3,7 @@ package rickshaw;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import rickshaw.commands.HelpCommand;
 import rickshaw.task.Task;
 
 /**
@@ -53,10 +54,9 @@ public class Ui {
      * Shows welcome message.
      */
     public void showWelcomeMessage() {
-        String welcomeMessage;
-        welcomeMessage = String.format(
-                "Hello! I'm %s%nWhat can i do for you?",
-                chatbotName
+        String welcomeMessage = String.format(
+                "Hello! I'm %s%nWhat can I do for you?%n%n%s",
+                chatbotName, HelpCommand.getHelpMessage()
         );
         format(welcomeMessage);
     }
