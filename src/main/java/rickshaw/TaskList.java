@@ -155,4 +155,21 @@ public class TaskList {
         }
         return foundTasks;
     }
+
+    /**
+     * Finds tasks from the task list that contain the keyword, with their original indices.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of arrays where each array contains [originalIndex, task].
+     */
+    public ArrayList<Object[]> findWithIndices(String keyword) {
+        ArrayList<Object[]> foundTasksWithIndices = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(keyword)) {
+                foundTasksWithIndices.add(new Object[]{i + 1, task}); // Store 1-based index
+            }
+        }
+        return foundTasksWithIndices;
+    }
 }

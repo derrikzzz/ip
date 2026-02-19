@@ -31,8 +31,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> foundTasks = tasks.find(keyword);
-        ui.showFindResults(foundTasks);
+        ArrayList<Object[]> foundTasksWithIndices = tasks.findWithIndices(keyword);
+        ui.showFindResultsWithIndices(foundTasksWithIndices);
     }
 
     /**
@@ -44,14 +44,17 @@ public class FindCommand extends Command {
      */
     @Override
     public String returnStringResponse(TaskList tasks, Storage storage) {
-        ArrayList<Task> foundTasks = tasks.find(keyword);
-        if (foundTasks.isEmpty()) {
+        ArrayList<Object[]> foundTasksWithIndices = tasks.findWithIndices(keyword);
+        if (foundTasksWithIndices.isEmpty()) {
             return "No matching tasks found.";
         }
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < foundTasks.size(); i++) {
-            sb.append(i + 1).append(". ").append(foundTasks.get(i));
-            if (i < foundTasks.size() - 1) {
+        for (int i = 0; i < foundTasksWithIndices.size(); i++) {
+            Object[] taskWithIndex = foundTasksWithIndices.get(i);
+            int originalIndex = (Integer) taskWithIndex[0];
+            Task task = (Task) taskWithIndex[1];
+            sb.append(originalIndex).append(". ").append(task);
+            if (i < foundTasksWithIndices.size() - 1) {
                 sb.append("\n");
             }
         }

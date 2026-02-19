@@ -145,6 +145,26 @@ public class Ui {
     }
 
     /**
+     * Shows list of matching tasks with their original indices.
+     *
+     * @param tasksWithIndices The list of [index, task] arrays to display.
+     */
+    public void showFindResultsWithIndices(ArrayList<Object[]> tasksWithIndices) {
+        if (tasksWithIndices.isEmpty()) {
+            format("No tasks found.");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(HORIZONTAL_LINE);
+        for (Object[] taskWithIndex : tasksWithIndices) {
+            int originalIndex = (Integer) taskWithIndex[0];
+            Task task = (Task) taskWithIndex[1];
+            System.out.println(INDENT + originalIndex + "." + task);
+        }
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    /**
      * Shows echo message.
      *
      * @param input The input to echo.
